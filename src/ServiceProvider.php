@@ -9,6 +9,9 @@ class ServiceProvider extends BaseServiceProvider
 {
     public function boot()
     {
+        $this->app->bind(Localizator::class);
+        $this->app->bind(Parser::class);
+
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__ . '/../config/locale.php' => config_path('locale.php'),

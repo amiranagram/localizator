@@ -2,7 +2,6 @@
 
 namespace Amirami\Locale;
 
-use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
 use Symfony\Component\Finder\Finder;
@@ -11,22 +10,26 @@ use Symfony\Component\Finder\SplFileInfo;
 class Localizator
 {
     /**
-     * @var Command
-     */
-    private $command;
-
-    /**
      * @var Finder
      */
     private $finder;
 
-    public function __construct(Command $command, Finder $finder)
+    /**
+     * Localizator constructor.
+     *
+     * @param Finder $finder
+     */
+    public function __construct(Finder $finder)
     {
-        $this->command = $command;
         $this->finder = $finder;
     }
 
-    public function localize(string $language)
+    /**
+     * @param string $language
+     * @return bool
+     * @throws \JsonException
+     */
+    public function localize(string $language): bool
     {
         $strings = $this->parseStrings(
             $this->findAndCollectFiles()
@@ -40,11 +43,31 @@ class Localizator
             $strings = $this->sortAlphabetically($strings);
         }
 
-        $this->writeToFile(
+        return $this->writeToFile(
             $language, $strings->toJson(JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
         );
     }
 
+    protected function parseStrings(Collection $files): Collection
+    {
+        $parser = app(Parser::class);
+        $parsedStrings = collect();
+
+        $files
+            ->map(function (SplFileInfo $file) use ($parser) {
+                return $parser->getStrings($file);
+            })
+            ->flatten()
+            ->each(function (string $string) use ($parsedStrings) {
+                $parsedStrings->put($string, $string);
+            });
+
+        return $parsedStrings;
+    }
+
+    /**
+     * @return Collection
+     */
     protected function findAndCollectFiles(): Collection
     {
         $config = config('locale.search');
@@ -54,25 +77,44 @@ class Localizator
         );
     }
 
-    protected function parseStrings(Collection $collection): Collection
-    {
-        return collect();
-    }
-
+    /**
+     * @param string $language
+     * @return Collection
+     * @throws \JsonException
+     */
     protected function getExisting(string $language): Collection
     {
-        return collect();
+        $locale = resource_path('lang/' . $language . '.json');
+
+        if (!file_exists($locale)) {
+            return collect();
+        }
+
+        return collect(
+            json_decode(file_get_contents($locale), true, 512, JSON_THROW_ON_ERROR)
+        );
     }
 
+    /**
+     * @param Collection $strings
+     * @return Collection
+     */
     protected function sortAlphabetically(Collection $strings): Collection
     {
-        return collect();
+        return $strings->sortBy(function ($item, $key) {
+            return $key;
+        }, SORT_STRING);
     }
 
-    protected function writeToFile(string $language, string $contents): void
+    /**
+     * @param string $language
+     * @param string $contents
+     * @return bool
+     */
+    protected function writeToFile(string $language, string $contents): bool
     {
         $file = resource_path('lang/' . $language . '.json');
 
-        (new Filesystem())->put($file, $contents);
+        return (bool) (new Filesystem())->put($file, $contents);
     }
 }

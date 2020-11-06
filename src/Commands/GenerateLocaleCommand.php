@@ -4,7 +4,6 @@ namespace Amirami\Locale\Commands;
 
 use Amirami\Locale\Localizator;
 use Illuminate\Console\Command;
-use Symfony\Component\Finder\Finder;
 use Symfony\Component\Console\Input\InputArgument;
 
 class GenerateLocaleCommand extends Command
@@ -24,29 +23,6 @@ class GenerateLocaleCommand extends Command
     protected $description = 'Command description';
 
     /**
-     * @var Finder
-     */
-    protected $finder;
-
-    /**
-     * @var Localizator
-     */
-    protected $localizator;
-
-    /**
-     * GenerateLocaleCommand constructor.
-     *
-     * @param Finder $finder
-     */
-    public function __construct(Finder $finder)
-    {
-        parent::__construct();
-
-        $this->finder = $finder;
-        $this->localizator = new Localizator($this, $finder);
-    }
-
-    /**
      * @return void
      */
     public function handle(): void
@@ -55,10 +31,12 @@ class GenerateLocaleCommand extends Command
             ? explode(',', $this->argument('lang'))
             : [config('app.locale')];
 
-        foreach ($languages as $language) {
-            $this->localizator->localize($language);
+        $localizator = app(Localizator::class);
 
-            $this->info('Translatable strings have been generated');
+        foreach ($languages as $language) {
+            $localizator->localize($language);
+
+            $this->info('Translatable strings have been generated for locale: ' . $language);
         }
     }
 
@@ -68,9 +46,7 @@ class GenerateLocaleCommand extends Command
     protected function getArguments(): array
     {
         return [
-            [
-                'lang', InputArgument::REQUIRED, 'dsadas'
-            ],
+            ['lang', InputArgument::REQUIRED, 'dsadas'],
         ];
     }
 }

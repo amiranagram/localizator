@@ -9,8 +9,8 @@
     },
     "require": {
         "symfony/finder": "^5.1",
-        "symfony/filesystem": "^5.1",
-        "illuminate/collections": "^8.0"
+        "illuminate/collections": "^8.0",
+        "illuminate/filesystem": "^8.0",
     },
     "config": {
         "sort-packages": true
