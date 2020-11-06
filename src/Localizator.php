@@ -41,7 +41,7 @@ class Localizator
 
         $strings = $strings->merge($translated);
 
-        if (config('locale.sort')) {
+        if (config('localizator.sort')) {
             $strings = $this->sortAlphabetically($strings);
         }
 
@@ -73,7 +73,7 @@ class Localizator
      */
     protected function findAndCollectFiles(): Collection
     {
-        $config = config('locale.search');
+        $config = config('localizator.search');
 
         return new Collection(
             $this->finder->in($config['dirs'])->name($config['patterns'])->files()
