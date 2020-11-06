@@ -26,8 +26,10 @@ class Localizator
 
     /**
      * @param string $language
-     * @return bool
+     *
      * @throws \JsonException
+     *
+     * @return bool
      */
     public function localize(string $language): bool
     {
@@ -44,7 +46,8 @@ class Localizator
         }
 
         return $this->writeToFile(
-            $language, $strings->toJson(JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
+            $language,
+            $strings->toJson(JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
         );
     }
 
@@ -79,12 +82,14 @@ class Localizator
 
     /**
      * @param string $language
-     * @return Collection
+     *
      * @throws \JsonException
+     *
+     * @return Collection
      */
     protected function getExisting(string $language): Collection
     {
-        $locale = resource_path('lang/' . $language . '.json');
+        $locale = resource_path('lang/'.$language.'.json');
 
         if (!file_exists($locale)) {
             return collect();
@@ -97,6 +102,7 @@ class Localizator
 
     /**
      * @param Collection $strings
+     *
      * @return Collection
      */
     protected function sortAlphabetically(Collection $strings): Collection
@@ -109,11 +115,12 @@ class Localizator
     /**
      * @param string $language
      * @param string $contents
+     *
      * @return bool
      */
     protected function writeToFile(string $language, string $contents): bool
     {
-        $file = resource_path('lang/' . $language . '.json');
+        $file = resource_path('lang/'.$language.'.json');
 
         return (bool) (new Filesystem())->put($file, $contents);
     }

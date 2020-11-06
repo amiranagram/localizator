@@ -7,6 +7,6 @@ return [
     'search' => [
         'dirs'     => ['resources/views'],
         'patterns' => ['*.php'],
-    ]
+    ],
 
 ];
