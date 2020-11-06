@@ -1,0 +1,25 @@
+{
+    "name": "amirami/localizator",
+    "type": "library",
+    "description": "Nothing",
+    "autoload": {
+        "psr-4": {
+            "Amirami\\Locale\\": "src"
+        }
+    },
+    "require": {
+        "symfony/finder": "^5.1",
+        "symfony/filesystem": "^5.1",
+        "illuminate/collections": "^8.0"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Amirami\\Locale\\ServiceProvider"
+            ]
+        }
+    }
+}
