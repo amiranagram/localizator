@@ -1,8 +1,8 @@
 <?php
 
-namespace Amirami\Locale;
+namespace Amirami\Localizator;
 
-use Amirami\Locale\Commands\GenerateLocaleCommand;
+use Amirami\Localizator\Commands\GenerateLocaleCommand;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 class ServiceProvider extends BaseServiceProvider

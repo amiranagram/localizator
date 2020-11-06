@@ -1,8 +1,8 @@
 <?php
 
-namespace Amirami\Locale\Commands;
+namespace Amirami\Localizator\Commands;
 
-use Amirami\Locale\Localizator;
+use Amirami\Localizator\Localizator;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 

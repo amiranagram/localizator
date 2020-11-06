@@ -1,6 +1,6 @@
 <?php
 
-namespace Amirami\Locale;
+namespace Amirami\Localizator;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;

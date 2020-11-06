@@ -4,7 +4,7 @@
     "description": "Nothing",
     "autoload": {
         "psr-4": {
-            "Amirami\\Locale\\": "src"
+            "Amirami\\Localizator\\": "src"
         }
     },
     "require": {
@@ -18,7 +18,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Amirami\\Locale\\ServiceProvider"
+                "Amirami\\Localizator\\ServiceProvider"
             ]
         }
     }

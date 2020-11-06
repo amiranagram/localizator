@@ -1,6 +1,6 @@
 <?php
 
-namespace Amirami\Locale;
+namespace Amirami\Localizator;
 
 use Illuminate\Support\Collection;
 use Symfony\Component\Finder\SplFileInfo;
