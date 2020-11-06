@@ -5,8 +5,8 @@ return [
     'sort' => true,
 
     'search' => [
-        'dirs'     => ['resources/js'],
-        'patterns' => ['*.vue'],
+        'dirs'     => ['resources/views'],
+        'patterns' => ['*.php'],
     ]
 
 ];
