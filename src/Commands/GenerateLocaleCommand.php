@@ -13,14 +13,14 @@ class GenerateLocaleCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'make:local {lang?}';
+    protected $signature = 'localize {lang?}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Generate local files with strings found in scanned files.';
 
     /**
      * @return void
