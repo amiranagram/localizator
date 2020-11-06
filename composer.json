@@ -1,6 +1,5 @@
 {
     "name": "amirami/localizator",
-    "type": "library",
     "description": "Nothing",
     "autoload": {
         "psr-4": {
