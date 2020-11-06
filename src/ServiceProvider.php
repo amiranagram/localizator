@@ -14,7 +14,7 @@ class ServiceProvider extends BaseServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../config/locale.php' => config_path('locale.php'),
+                __DIR__.'/../config/locale.php' => config_path('locale.php'),
             ], 'config');
 
             $this->commands(GenerateLocaleCommand::class);
@@ -23,6 +23,6 @@ class ServiceProvider extends BaseServiceProvider
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/locale.php', 'locale');
+        $this->mergeConfigFrom(__DIR__.'/../config/locale.php', 'locale');
     }
 }

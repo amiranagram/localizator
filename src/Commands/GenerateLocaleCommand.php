@@ -36,7 +36,7 @@ class GenerateLocaleCommand extends Command
         foreach ($languages as $language) {
             $localizator->localize($language);
 
-            $this->info('Translatable strings have been generated for locale: ' . $language);
+            $this->info('Translatable strings have been generated for locale: '.$language);
         }
     }
 
