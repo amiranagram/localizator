@@ -29,7 +29,7 @@ class GenerateLocaleCommand extends Command
     {
         $languages = $this->argument('lang')
             ? explode(',', $this->argument('lang'))
-            : [config('app.localizator')];
+            : [config('app.locale')];
 
         $localizator = app(Localizator::class);
 
