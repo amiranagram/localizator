@@ -46,7 +46,7 @@ class GenerateLocaleCommand extends Command
     protected function getArguments(): array
     {
         return [
-            ['lang', InputArgument::REQUIRED, 'dsadas'],
+            ['lang', InputArgument::REQUIRED, 'Argument'],
         ];
     }
 }
