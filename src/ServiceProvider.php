@@ -2,7 +2,7 @@
 
 namespace Amirami\Localizator;
 
-use Amirami\Localizator\Commands\GenerateLocaleCommand;
+use Amirami\Localizator\Commands\LocalizeCommand;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 class ServiceProvider extends BaseServiceProvider
@@ -17,7 +17,7 @@ class ServiceProvider extends BaseServiceProvider
                 __DIR__.'/../config/localizator.php' => config_path('localizator.php'),
             ], 'config');
 
-            $this->commands(GenerateLocaleCommand::class);
+            $this->commands(LocalizeCommand::class);
         }
     }
 

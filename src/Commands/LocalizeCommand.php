@@ -6,7 +6,7 @@ use Amirami\Localizator\Localizator;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 
-class GenerateLocaleCommand extends Command
+class LocalizeCommand extends Command
 {
     /**
      * The name and signature of the console command.
