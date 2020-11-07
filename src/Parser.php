@@ -10,7 +10,7 @@ class Parser
     public function getStrings(SplFileInfo $file): Collection
     {
         if (
-            !preg_match_all('/(__)\(\h*[\'"](.+)[\'"]\h*[),]/U', $file->getContents(), $matches)
+            ! preg_match_all('/(__)\(\h*[\'"](.+)[\'"]\h*[),]/U', $file->getContents(), $matches)
         ) {
             return collect([]);
         }
