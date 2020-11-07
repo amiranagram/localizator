@@ -5,8 +5,9 @@ return [
     'sort' => true,
 
     'search' => [
-        'dirs'     => ['resources/views'],
-        'patterns' => ['*.php'],
+        'dirs'      => ['resources'],
+        'patterns'  => ['*.php'],
+        'functions' => ['__', 'trans', '@lang']
     ],
 
 ];

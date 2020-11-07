@@ -9,12 +9,22 @@ class Parser
 {
     public function getStrings(SplFileInfo $file): Collection
     {
-        if (
-            ! preg_match_all('/(__)\(\h*[\'"](.+)[\'"]\h*[),]/U', $file->getContents(), $matches)
-        ) {
-            return collect([]);
+        $functions = config('localizator.search.functions');
+        $strings = collect();
+
+        foreach ($functions as $function) {
+            if (
+                preg_match_all($this->searchPattern($function), $file->getContents(), $matches)
+            ) {
+                $strings->push($matches[2]);
+            }
         }
 
-        return collect($matches[2])->unique();
+        return $strings->count() ? $strings->flatten()->unique() : $strings;
+    }
+
+    protected function searchPattern(string $function): string
+    {
+        return '/('.$function.')\(\h*[\'"](.+)[\'"]\h*[),]/U';
     }
 }
