@@ -1,7 +1,7 @@
 # Localizator
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/amirami/localizator.svg?style=flat-square)](https://packagist.org/packages/amirami/localizator)
-![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/amirami/localizator/tests?label=tests)
+![Tests](https://github.com/amiranagram/localizator/workflows/Tests/badge.svg)
 [![Total Downloads](https://img.shields.io/packagist/dt/amirami/localizator.svg?style=flat-square)](https://packagist.org/packages/amirami/localizator)
 
 ## Installation
