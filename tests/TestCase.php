@@ -21,6 +21,7 @@ class TestCase extends Orchestra
      * Get package providers.
      *
      * @param \Illuminate\Foundation\Application $app
+     *
      * @return array|string[]
      */
     protected function getPackageProviders($app)
@@ -39,7 +40,7 @@ class TestCase extends Orchestra
      */
     public function getEnvironmentSetUp($app)
     {
-        $app->setBasePath(__DIR__ . DIRECTORY_SEPARATOR . 'mock');
+        $app->setBasePath(__DIR__.DIRECTORY_SEPARATOR.'mock');
 
         $app['config']->set('app.locale', 'en');
 
