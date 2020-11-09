@@ -65,23 +65,19 @@ class TestCase extends Orchestra
     }
 
     /**
+     * Delete all files from selected directories in resources folder.
      *
-     */
-    protected function cleanLangDirectory(): void
-    {
-        $files = (new Finder())->in(resource_path('lang'))->files();
-
-        foreach ($files as $file) {
-            unlink($file->getPathname());
-        }
-    }
-
-    /**
+     * @param array|string[] ...$dirNames
      *
+     * @return void
      */
-    protected function cleanViewsDirectory(): void
+    protected function cleanDirectories(...$dirNames): void
     {
-        $files = (new Finder())->in(resource_path('views'))->files();
+        $dirNames = array_map(static function ($dirName) {
+            return resource_path($dirName);
+        }, $dirNames);
+
+        $files = (new Finder())->in($dirNames)->files();
 
         foreach ($files as $file) {
             unlink($file->getPathname());
