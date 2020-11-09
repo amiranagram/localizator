@@ -7,7 +7,7 @@ return [
     'search' => [
         'dirs'      => ['resources'],
         'patterns'  => ['*.php'],
-        'functions' => ['__', 'trans', '@lang']
+        'functions' => ['__', 'trans', '@lang'],
     ],
 
 ];
