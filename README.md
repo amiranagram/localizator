@@ -84,7 +84,7 @@ php artisan localize
 
 In this case translation strings will be generated for the language specified in `app.locale` config.
 
-> Note: Strings you have already translated will not be replaced.
+> Note: Strings you have already translated will not be overwritten.
 
 ### Key Sorting
 
