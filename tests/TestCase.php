@@ -67,7 +67,7 @@ class TestCase extends Orchestra
     /**
      * Delete all files from selected directories in resources folder.
      *
-     * @param array|string[] ...$dirNames
+     * @param mixed ...$dirNames
      *
      * @return void
      */
