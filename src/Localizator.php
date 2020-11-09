@@ -91,7 +91,7 @@ class Localizator
     {
         $locale = resource_path('lang/'.$language.'.json');
 
-        if (!file_exists($locale)) {
+        if (! file_exists($locale)) {
             return collect();
         }
 
