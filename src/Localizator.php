@@ -74,9 +74,12 @@ class Localizator
     protected function findAndCollectFiles(): Collection
     {
         $config = config('localizator.search');
+        $directories = array_map(static function ($dir) {
+            return base_path($dir);
+        }, $config['dirs']);
 
         return new Collection(
-            $this->finder->in($config['dirs'])->name($config['patterns'])->files()
+            $this->finder->in($directories)->name($config['patterns'])->files()
         );
     }
 

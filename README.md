@@ -4,6 +4,9 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/amirami/localizator.svg)](https://packagist.org/packages/amirami/localizator)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/amirami/localizator.svg)](https://packagist.org/packages/amirami/localizator)
 
+Localizator is a small tool for Laravel that gives you the ability to extract untranslated string from your project files with one command. Current version extracts only to JSON
+ language files.
+
 ## Installation
 
 You can install the package via composer:
@@ -52,22 +55,70 @@ This is the contents of the published config file:
 ```php
 return [
 
-    'sort' => true,
-
+    /**
+     * Search criteria for files.
+     */
     'search' => [
-        'dirs'      => ['resources'],
+        /**
+         * Directories which should be looked inside.
+         */
+        'dirs'      => ['resources/views'],
+
+        /**
+         * Patterns by which files should be queried.
+         * The values can be a regular expresion, glob, or just a string.
+         */
         'patterns'  => ['*.php'],
+
+        /**
+         * Functions that the strings will be extracted from.
+         * Add here any custom defined functions.
+         * NOTE: The translation string should always be the first argument.
+         */
         'functions' => ['__', 'trans', '@lang']
     ],
+
+    /**
+     * Should the localize command sort extracted strings alphabetically?
+     */
+    'sort'   => true,
 
 ];
 ```
 
 ## Usage
 
+To extract all the strings, it's as simple as running:
+
 ``` bash
-php artisan localize en,de
+php artisan localize de,fr
 ```
+
+This commands will create (if don't exist) `de.json` and `fr.json` files inside the `resources/lang` directory.
+
+You can also run the artisan command without the country code arguments.
+
+``` bash
+php artisan localize
+```
+
+In this case translation strings will be generated for the language specified in `app.locale` config.
+
+> Note: Strings you have already translated will not be overwritten.
+
+### Key Sorting
+
+By default, the strings generated inside those JSON files will be sorted alphabetically by their keys.
+If you wanna turn off this feature just set `sort => false` in the config file.
+
+### Searching
+
+The way the strings are being extracted is simple.
+
+We are looking inside the directories defined in `search.dirs` config, we match the files using patterns defined in `search.patterns`, and finally we look to extract strings
+ which are the first argument of the functions defined in `search.functions`.
+ 
+You are free to change any of these values inside the config file to suit you own needs.
 
 ## Testing
 
