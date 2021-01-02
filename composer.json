@@ -15,7 +15,7 @@
         "php": "^7.2|^7.4",
         "ext-json": "*",
         "illuminate/support": "^6.0|^8.0",
-        "symfony/finder": "^4.4|^5.1|^6.0"
+        "symfony/finder": "^4.4|^5.1"
     },
     "require-dev": {
         "orchestra/testbench": "^4.0",
