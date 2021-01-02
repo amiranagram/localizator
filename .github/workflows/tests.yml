@@ -10,7 +10,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
         php: [7.2]
-        laravel: [6.*, 8.*]
+        laravel: [6.*]
         testbench: [4.4]
         dependency-version: [prefer-lowest, prefer-stable]
 
