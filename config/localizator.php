@@ -2,10 +2,15 @@
 
 return [
 
+    'localize' => [
+        'default' => true,
+        'json'    => true,
+    ],
+
     /**
      * Search criteria for files.
      */
-    'search' => [
+    'search'   => [
         /**
          * Directories which should be looked inside.
          */
@@ -28,6 +33,6 @@ return [
     /**
      * Should the localize command sort extracted strings alphabetically?
      */
-    'sort'   => true,
+    'sort'     => true,
 
 ];

@@ -2,7 +2,7 @@
 
 namespace Amirami\Localizator\Commands;
 
-use Amirami\Localizator\Localizator;
+use Amirami\Localizator\Facades\Localizator;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 
@@ -20,33 +20,61 @@ class LocalizeCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Generate local files with strings found in scanned files.';
+    protected $description = 'Generate locale files with strings found in scanned files.';
 
     /**
+     * Execute the localize command.
+     *
      * @return void
      */
     public function handle(): void
     {
-        $languages = $this->argument('lang')
-            ? explode(',', $this->argument('lang'))
-            : [config('app.locale')];
+        $locales = $this->getLocales();
+        $progressBar = $this->output->createProgressBar(count($locales));
 
-        $localizator = app(Localizator::class);
+        $this->info('Localizing: ' . implode(', ', $locales));
 
-        foreach ($languages as $language) {
-            $localizator->localize($language);
+        $files = app('localizator.finder')->getFiles();
+        $parser = app('localizator.parser');
 
-            $this->info('Translatable strings have been generated for locale: '.$language);
+        $parser->parseKeys($files);
+
+        $progressBar->setFormat('%current%/%max% [%bar%] %percent:3s%% %message%');
+        $progressBar->setMessage('Localizing...');
+        $progressBar->start();
+
+        foreach ($locales as $locale) {
+            $progressBar->setMessage("Localizing {$locale}...");
+
+            foreach ($this->getTypes() as $type) {
+                Localizator::localize($parser->getKeys($locale, $type), $type, $locale);
+            }
+
+            $progressBar->advance();
         }
+
+        $progressBar->finish();
+
+        $this->info(
+            "\nTranslatable strings have been generated for locale(s): " . implode(', ', $locales)
+        );
     }
 
     /**
-     * @return array|array[]
+     * @return array
      */
-    protected function getArguments(): array
+    protected function getLocales(): array
     {
-        return [
-            ['lang', InputArgument::REQUIRED, 'Argument'],
-        ];
+        return $this->argument('lang')
+            ? explode(',', $this->argument('lang'))
+            : [config('app.locale')];
+    }
+
+    /**
+     * @return array
+     */
+    protected function getTypes(): array
+    {
+        return array_keys(array_filter(config('localizator.localize')));
     }
 }
