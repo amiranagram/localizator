@@ -21,7 +21,8 @@ class DefaultWriter implements Writable
                 $file = $this->getFile($locale, $fileName);
 
                 (new Filesystem)->put(
-                    $file, $this->exportArray($contents)
+                    $file,
+                    $this->exportArray($contents)
                 );
             });
     }
@@ -50,14 +51,16 @@ class DefaultWriter implements Writable
         $export = var_export($contents, true);
 
         $patterns = [
-            "/array \(/"                       => '[',
-            "/^([ ]*)\)(,?)$/m"                => '$1$1]$2',
-            "/=>[ ]?\n[ ]+\[/"                 => '=> [',
+            "/array \(/" => '[',
+            "/^([ ]*)\)(,?)$/m" => '$1$1]$2',
+            "/=>[ ]?\n[ ]+\[/" => '=> [',
             "/([ ]*)(\'[^\']+\') => ([\[\'])/" => '$1$1$2 => $3',
         ];
 
         $export = preg_replace(
-            array_keys($patterns), array_values($patterns), $export
+            array_keys($patterns),
+            array_values($patterns),
+            $export
         );
 
         return sprintf("<?php \n\nreturn %s;\n", $export);

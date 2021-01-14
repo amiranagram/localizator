@@ -4,7 +4,6 @@ namespace Amirami\Localizator\Commands;
 
 use Amirami\Localizator\Facades\Localizator;
 use Illuminate\Console\Command;
-use Symfony\Component\Console\Input\InputArgument;
 
 class LocalizeCommand extends Command
 {

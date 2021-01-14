@@ -38,10 +38,11 @@ class DefaultKeyCollector implements Collectable
     {
         $dir = resource_path('lang' . DIRECTORY_SEPARATOR . $locale);
 
-        if (!file_exists($dir)) {
-            if (!mkdir($dir, 0755) && !is_dir($dir)) {
+        if (! file_exists($dir)) {
+            if (! mkdir($dir, 0755) && ! is_dir($dir)) {
                 throw new RuntimeException(sprintf('Directory "%s" was not created', $dir));
             }
+
             return new Collection;
         }
 

@@ -12,7 +12,7 @@ class JsonKeyCollector implements Collectable
     {
         $file = resource_path('lang' . DIRECTORY_SEPARATOR . "{$locale}.json");
 
-        if (!file_exists($file)) {
+        if (! file_exists($file)) {
             return new JsonKeyCollection;
         }
 

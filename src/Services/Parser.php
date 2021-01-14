@@ -105,7 +105,7 @@ class Parser
                 return $this->defaultKeys->combine(
                     $this->combineValues($locale, $type, $this->defaultKeys)
                 );
-            case 'json';
+            case 'json':
                 return $this->jsonKeys->combine(
                     $this->combineValues($locale, $type, $this->jsonKeys)
                 );

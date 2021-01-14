@@ -17,7 +17,8 @@ class JsonWriter implements Writable
         $file = resource_path('lang' . DIRECTORY_SEPARATOR . "{$locale}.json");
 
         (new Filesystem)->put(
-            $file, $keys->toJson(JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
+            $file,
+            $keys->toJson(JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
         );
     }
 }
