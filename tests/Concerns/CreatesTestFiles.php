@@ -18,7 +18,8 @@ trait CreatesTestFiles
     protected function createTestFile(string $contents, string $fileName): void
     {
         file_put_contents(
-            resource_path($fileName), $contents
+            resource_path($fileName),
+            $contents
         );
     }
 
@@ -30,7 +31,8 @@ trait CreatesTestFiles
     protected function createTestView(string $contents, string $fileName = 'test'): void
     {
         $this->createTestFile(
-            $contents, 'views' . DIRECTORY_SEPARATOR . "{$fileName}.blade.php"
+            $contents,
+            'views' . DIRECTORY_SEPARATOR . "{$fileName}.blade.php"
         );
     }
 
@@ -42,7 +44,8 @@ trait CreatesTestFiles
     protected function createTestLangFile(string $contents, string $fileName): void
     {
         $this->createTestFile(
-            $contents, 'lang' . DIRECTORY_SEPARATOR . $fileName
+            $contents,
+            'lang' . DIRECTORY_SEPARATOR . $fileName
         );
     }
 
@@ -54,7 +57,8 @@ trait CreatesTestFiles
     protected function createTestJsonLangFile(array $contents, string $locale): void
     {
         $this->createTestLangFile(
-            json_encode($contents, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), "{$locale}.json"
+            json_encode($contents, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE),
+            "{$locale}.json"
         );
     }
 
@@ -69,12 +73,13 @@ trait CreatesTestFiles
         $export = sprintf("<?php \n\nreturn %s;\n", var_export($contents, true));
         $dir = resource_path('lang' . DIRECTORY_SEPARATOR . $locale);
 
-        if (!file_exists($dir) && !mkdir($dir, 0755) && !is_dir($dir)) {
+        if (! file_exists($dir) && ! mkdir($dir, 0755) && ! is_dir($dir)) {
             throw new RuntimeException(sprintf('Directory "%s" was not created', $dir));
         }
 
         $this->createTestLangFile(
-            $export, $locale . DIRECTORY_SEPARATOR . "{$fileName}.php"
+            $export,
+            $locale . DIRECTORY_SEPARATOR . "{$fileName}.php"
         );
     }
 }

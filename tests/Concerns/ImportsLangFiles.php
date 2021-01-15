@@ -35,7 +35,8 @@ trait ImportsLangFiles
     protected function getJsonLangContents(string $locale): array
     {
         return json_decode(
-            file_get_contents($this->getLangFilePath("{$locale}.json")), true
+            file_get_contents($this->getLangFilePath("{$locale}.json")),
+            true
         );
     }
 }
