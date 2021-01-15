@@ -9,6 +9,10 @@ use RuntimeException;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
+/**
+ * Class DefaultKeyCollector
+ * @package Amirami\Localizator\Services\Collectors
+ */
 class DefaultKeyCollector implements Collectable
 {
     /**

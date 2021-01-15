@@ -6,6 +6,10 @@ use Amirami\Localizator\Contracts\Translatable;
 use Amirami\Localizator\Contracts\Writable;
 use Illuminate\Filesystem\Filesystem;
 
+/**
+ * Class JsonWriter
+ * @package Amirami\Localizator\Services\Writers
+ */
 class JsonWriter implements Writable
 {
     /**

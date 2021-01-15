@@ -5,6 +5,10 @@ namespace Amirami\Localizator\Commands;
 use Amirami\Localizator\Facades\Localizator;
 use Illuminate\Console\Command;
 
+/**
+ * Class LocalizeCommand
+ * @package Amirami\Localizator\Commands
+ */
 class LocalizeCommand extends Command
 {
     /**

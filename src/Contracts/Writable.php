@@ -2,6 +2,10 @@
 
 namespace Amirami\Localizator\Contracts;
 
+/**
+ * Interface Writable
+ * @package Amirami\Localizator\Contracts
+ */
 interface Writable
 {
     /**

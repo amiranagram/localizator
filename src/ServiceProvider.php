@@ -2,8 +2,6 @@
 
 namespace Amirami\Localizator;
 
-use Amirami\Localizator\Collections\DefaultKeyCollection;
-use Amirami\Localizator\Collections\JsonKeyCollection;
 use Amirami\Localizator\Commands\LocalizeCommand;
 use Amirami\Localizator\Services\Collectors\DefaultKeyCollector;
 use Amirami\Localizator\Services\Collectors\JsonKeyCollector;
@@ -14,6 +12,10 @@ use Amirami\Localizator\Services\Writers\DefaultWriter;
 use Amirami\Localizator\Services\Writers\JsonWriter;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
+/**
+ * Class ServiceProvider
+ * @package Amirami\Localizator
+ */
 class ServiceProvider extends BaseServiceProvider
 {
     /**
@@ -54,9 +56,6 @@ class ServiceProvider extends BaseServiceProvider
         $this->app->singleton('localizator.parser', function ($app) {
             return new Parser($app['config']['localizator']);
         });
-
-        $this->app->bind('localizator.collections.default', DefaultKeyCollection::class);
-        $this->app->bind('localizator.collections.json', JsonKeyCollection::class);
 
         $this->app->bind('localizator.writers.default', DefaultWriter::class);
         $this->app->bind('localizator.writers.json', JsonWriter::class);

@@ -6,13 +6,12 @@ use Amirami\Localizator\Contracts\Collectable;
 use Amirami\Localizator\Contracts\Translatable;
 use Amirami\Localizator\Contracts\Writable;
 
+/**
+ * Class Localizator
+ * @package Amirami\Localizator\Services
+ */
 class Localizator
 {
-    /**
-     * @var string
-     */
-    private $locale;
-
     /**
      * @param Translatable $keys
      * @param string $type

@@ -8,6 +8,10 @@ use Illuminate\Support\Collection;
 use RuntimeException;
 use Symfony\Component\Finder\SplFileInfo;
 
+/**
+ * Class Parser
+ * @package Amirami\Localizator\Services
+ */
 class Parser
 {
     /**
@@ -111,7 +115,7 @@ class Parser
                 );
         }
 
-        throw new RuntimeException('Export type not recognized! Only recognized types are "default" and "json"');
+        throw new RuntimeException('Export type not recognized! Only recognized types are "default" and "json".');
     }
 
     /**
