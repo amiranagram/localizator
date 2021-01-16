@@ -34,7 +34,8 @@ class TestCase extends Orchestra
      */
     public static function tearDownAfterClass(): void
     {
-        self::flushDirectories('lang');
+        // Flush one last time after all tests have finished running.
+        self::flushDirectories('lang', 'views');
     }
 
     /**

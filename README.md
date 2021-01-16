@@ -4,8 +4,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/amirami/localizator.svg)](https://packagist.org/packages/amirami/localizator)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/amirami/localizator.svg)](https://packagist.org/packages/amirami/localizator)
 
-Localizator is a small tool for Laravel that gives you the ability to extract untranslated string from your project files with one command. Current version extracts only to JSON
- language files.
+Localizator is a small tool for Laravel that gives you the ability to extract untranslated string from your project files with one command.
 
 ## Installation
 
@@ -53,12 +52,31 @@ php artisan vendor:publish --provider="Amirami\Localizator\ServiceProvider" --ta
 This is the contents of the published config file:
 
 ```php
+<?php
+
 return [
+
+    /**
+     * Localize types of translation strings.
+     */
+    'localize' => [
+        /**
+         * Short keys. This is the default for Laravel.
+         * They are stored in PHP files inside folders name by their locale code.
+         * Laravel installation comes with default: auth.php, pagination.php, passwords.php and validation.php
+         */
+        'default' => true,
+        /**
+         * Translations strings as key.
+         * They are stored in JSON file for each locale.
+         */
+        'json'    => true,
+    ],
 
     /**
      * Search criteria for files.
      */
-    'search' => [
+    'search'   => [
         /**
          * Directories which should be looked inside.
          */
@@ -81,9 +99,10 @@ return [
     /**
      * Should the localize command sort extracted strings alphabetically?
      */
-    'sort'   => true,
+    'sort'     => true,
 
 ];
+
 ```
 
 ## Usage
@@ -94,7 +113,8 @@ To extract all the strings, it's as simple as running:
 php artisan localize de,fr
 ```
 
-This commands will create (if don't exist) `de.json` and `fr.json` files inside the `resources/lang` directory.
+This command will create (if don't exist) `de.json` and `fr.json` files inside the `resources/lang` directory.
+If you have short keys enabled and used in your files (e.g. `pagination.next`) the localize command will create folders `de` and `fr` inside `resources/lang` directory and PHP files inside by the short key's prefix (e.g. `pagination.php`).
 
 You can also run the artisan command without the country code arguments.
 
