@@ -3,9 +3,26 @@
 return [
 
     /**
+     * Localize types of translation strings.
+     */
+    'localize' => [
+        /**
+         * Short keys. This is the default for Laravel.
+         * They are stored in PHP files inside folders name by their locale code.
+         * Laravel installation comes with default: auth.php, pagination.php, passwords.php and validation.php
+         */
+        'default' => true,
+        /**
+         * Translations strings as key.
+         * They are stored in JSON file for each locale.
+         */
+        'json'    => true,
+    ],
+
+    /**
      * Search criteria for files.
      */
-    'search' => [
+    'search'   => [
         /**
          * Directories which should be looked inside.
          */
@@ -28,6 +45,6 @@ return [
     /**
      * Should the localize command sort extracted strings alphabetically?
      */
-    'sort'   => true,
+    'sort'     => true,
 
 ];
