@@ -12,15 +12,15 @@
         }
     ],
     "require": {
-        "php": "^7.2|^7.4",
+        "php": "^7.2|^8.0",
         "ext-json": "*",
-        "illuminate/support": "^6.0|^8.0",
-        "illuminate/filesystem": "^6.0|^8.0",
+        "illuminate/support": "^6.0|^7.0|^8.0",
+        "illuminate/filesystem": "^6.0|^7.0|^8.0",
         "symfony/finder": "^4.4|^5.1"
     },
     "require-dev": {
         "orchestra/testbench": "^4.0",
-        "phpunit/phpunit": "^8.5",
+        "phpunit/phpunit": "^8.5|^9.3",
         "vimeo/psalm": "^3.11"
     },
     "autoload": {
