@@ -26,8 +26,8 @@ class LocalizatorTest extends TestCase
         // Do their contents match the expected results?
         $enDefaultContents = $this->getDefaultLangContents('en', 'app');
         $enJsonContents = $this->getJsonLangContents('en');
-        self::assertEquals(['name' => ''], $enDefaultContents);
-        self::assertEquals(['Localizator' => 'Localizator'], $enJsonContents);
+        self::assertSame(['name' => ''], $enDefaultContents);
+        self::assertSame(['Localizator' => 'Localizator'], $enJsonContents);
 
         // Cleanup.
         self::flushDirectories('lang', 'views');
@@ -53,10 +53,10 @@ class LocalizatorTest extends TestCase
         $enJsonContents = $this->getJsonLangContents('en');
         $deDefaultContents = $this->getDefaultLangContents('de', 'app');
         $deJsonContents = $this->getJsonLangContents('de');
-        self::assertEquals(['name' => ''], $enDefaultContents);
-        self::assertEquals(['name' => ''], $deDefaultContents);
-        self::assertEquals(['Localizator' => 'Localizator'], $enJsonContents);
-        self::assertEquals(['Localizator' => ''], $deJsonContents);
+        self::assertSame(['name' => ''], $enDefaultContents);
+        self::assertSame(['name' => ''], $deDefaultContents);
+        self::assertSame(['Localizator' => 'Localizator'], $enJsonContents);
+        self::assertSame(['Localizator' => ''], $deJsonContents);
 
         // Cleanup.
         self::flushDirectories('lang', 'views');
@@ -83,12 +83,12 @@ class LocalizatorTest extends TestCase
         $enJsonContents = $this->getJsonLangContents('en');
 
         // Did it sort the translation keys like we expected?
-        self::assertEquals([
+        self::assertSame([
             'failed' => '',
             'password' => '',
             'throttle' => '',
         ], $enDefaultContents);
-        self::assertEquals([
+        self::assertSame([
             'Cancel' => 'Cancel',
             'Delete' => 'Delete',
             'Login' => 'Login',
@@ -127,12 +127,12 @@ class LocalizatorTest extends TestCase
         $enJsonContents = $this->getJsonLangContents('de');
 
         // Did it preserve the already translated keys?
-        self::assertEquals([
+        self::assertSame([
             'failed' => '',
             'password' => 'Das eingegebene Passwort ist nicht korrekt.',
             'throttle' => '',
         ], $enDefaultContents);
-        self::assertEquals([
+        self::assertSame([
             'Cancel' => '',
             'Delete' => 'Löschen',
             'Login' => 'Anmelden',

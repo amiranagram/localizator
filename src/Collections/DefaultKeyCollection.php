@@ -13,9 +13,7 @@ class DefaultKeyCollection extends Translatable
      */
     public function sortAlphabetically(): Collection
     {
-        return $this->sortBy(function ($item, $key) {
-            return $key;
-        }, SORT_STRING);
+        return $this->sortKeys(SORT_NATURAL | SORT_FLAG_CASE);
     }
 
     /**
