@@ -51,6 +51,9 @@ class Parser
                 return $this->getStrings($file);
             })
             ->flatten()
+            ->map(function (string $string) {
+                return stripslashes($string);
+            })
             ->each(function (string $string) {
                 if ($this->isDotKey($string)) {
                     $this->defaultKeys->push($string);
