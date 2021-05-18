@@ -141,4 +141,32 @@ class LocalizatorTest extends TestCase
         // Cleanup.
         self::flushDirectories('lang', 'views');
     }
+
+    /**
+     * @return void
+     */
+    public function testLocalizeCommandWhereKeysAreEscapedWithSlashes(): void
+    {
+        $this->createTestView("{{ __('Amir\'s PC') }} {{ __('Jacob\'s Ladder') }} {{ __('mom\'s spaghetti') }}");
+
+        // Run localize command.
+        $this->artisan('localize')
+            ->assertExitCode(0);
+
+        // Do created locale files exist?
+        self::assertJsonLangFilesExist('en');
+
+        // Do their contents match the expected results?
+        $enJsonContents = $this->getJsonLangContents('en');
+
+        // Did it sort the translation keys like we expected?
+        self::assertSame([
+            'Amir\'s PC' => 'Amir\'s PC',
+            'Jacob\'s Ladder' => 'Jacob\'s Ladder',
+            'mom\'s spaghetti' => 'mom\'s spaghetti',
+        ], $enJsonContents);
+
+        // Cleanup.
+        self::flushDirectories('lang', 'views');
+    }
 }
