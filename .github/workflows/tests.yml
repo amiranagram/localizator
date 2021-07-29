@@ -10,7 +10,6 @@ jobs:
       matrix:
         php: [7.2, 8.0]
         laravel: [6.*, 8.*]
-        dependency-version: [prefer-lowest, prefer-stable]
         include:
           - php: 7.2
             laravel: 6.*
@@ -25,7 +24,7 @@ jobs:
           - php: 7.2
             laravel: 8.*
 
-    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }} - ubuntu-latest
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ubuntu-latest
 
     steps:
       - name: Checkout code
