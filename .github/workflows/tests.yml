@@ -8,22 +8,14 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: [7.2, 8.0]
+        php: [7.4, 8.0]
         laravel: [6.*, 8.*]
-        testbench: [4.*]
         stability: [prefer-lowest, prefer-stable]
         include:
-          - php: 7.2
-            laravel: 6.*
-            testbench: 4.*
-          - php: 8.0
-            laravel: 8.*
-            testbench: 6.*
-        exclude:
-          - php: 7.2
-            laravel: 8.*
+          - laravel: 8.*
+            testbench: ^6.6
 
-    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} ubuntu-latest
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -33,16 +25,18 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+          extensions: mbstring
           coverage: none
 
       - name: Setup Problem Matches
         run: |
           echo "::add-matcher::${{ runner.tool_cache }}/php.json"
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
       - name: Install dependencies
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+
       - name: Execute tests
         run: vendor/bin/phpunit
