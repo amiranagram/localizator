@@ -16,9 +16,6 @@ jobs:
           - php: 7.2
             laravel: 6.*
             testbench: 4.*
-          - php: 7.4
-            laravel: 6.*
-            testbench: 4.*
           - php: 8.0
             laravel: 8.*
             testbench: 6.*
@@ -26,7 +23,7 @@ jobs:
           - php: 7.2
             laravel: 8.*
 
-    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ubuntu-latest
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} ubuntu-latest
 
     steps:
       - name: Checkout code
