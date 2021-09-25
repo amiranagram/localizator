@@ -67,7 +67,7 @@ class DefaultWriter implements Writable
             $export
         );
 
-        return sprintf("<?php \n\nreturn %s;\n", $export);
+        return sprintf("<?php\n\nreturn %s;\n", $export);
     }
 
     /**
