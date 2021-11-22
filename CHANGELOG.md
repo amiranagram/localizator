@@ -2,6 +2,12 @@
 
 All notable changes to `amirami/localizator` will be documented in this file.
 
+## v0.7.0-alpha
+
+### Changed
+
+- Update dependencies, PHP 7.2.5 is now the minimum version.
+
 ## v0.6.1-alpha
 
 ### Fixed
@@ -44,7 +50,7 @@ All notable changes to `amirami/localizator` will be documented in this file.
 ### Added
 - Basic tests.
 
-### Updated
+### Changed
 - Small improvements using paths.
 - Documentation.
 - Dependencies.
