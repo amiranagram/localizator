@@ -23,8 +23,10 @@ jobs:
         include:
           - laravel: 6.*
             testbench: ^4.0
+            os: ubuntu-latest
           - php: 7.2.5
             testbench: ^5.0
+            os: windows-latest
 
     name: php-${{ matrix.php }} - laravel-${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
