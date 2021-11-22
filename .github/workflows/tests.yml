@@ -1,6 +1,6 @@
 name: Tests
 
-on: [push, pull_request]
+on: [ push, pull_request ]
 
 jobs:
   test:
@@ -8,11 +8,11 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        os: [ubuntu-latest, windows-latest]
-        php: [7.2.5, 8.0]
-        laravel: [6.*, 8.*]
-        testbench: [^6.6]
-        stability: [prefer-lowest, prefer-stable]
+        os: [ ubuntu-latest, windows-latest ]
+        php: [ 7.2.5, 8.0 ]
+        laravel: [ 6.*, 8.* ]
+        testbench: [ ^6.6 ]
+        stability: [ prefer-lowest, prefer-stable ]
         exclude:
           - php: 7.2.5
             laravel: 8.*
