@@ -4,20 +4,29 @@ on: [push, pull_request]
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: true
       matrix:
-        php: [7.4, 8.0]
+        os: [ubuntu-latest, windows-latest]
+        php: [7.2.5, 8.0]
         laravel: [6.*, 8.*]
+        testbench: [^6.6]
         stability: [prefer-lowest, prefer-stable]
+        exclude:
+          - php: 7.2.5
+            laravel: 8.*
+          - php: 7.2.5
+            testbench: ^6.6
+          - laravel: 6.*
+            testbench: ^6.6
         include:
           - laravel: 6.*
             testbench: ^4.0
-          - laravel: 8.*
-            testbench: ^6.6
+          - php: 7.2.5
+            testbench: ^5.0
 
-    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ubuntu-latest
+    name: php-${{ matrix.php }} - laravel-${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
     steps:
       - name: Checkout code
@@ -30,14 +39,14 @@ jobs:
           extensions: mbstring
           coverage: none
 
-      - name: Setup Problem Matches
+      - name: Setup problem matchers
         run: |
           echo "::add-matcher::${{ runner.tool_cache }}/php.json"
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
       - name: Install dependencies
         run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update --dev
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: Execute tests
