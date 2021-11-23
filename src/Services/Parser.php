@@ -4,6 +4,7 @@ namespace Amirami\Localizator\Services;
 
 use Amirami\Localizator\Collections\DefaultKeyCollection;
 use Amirami\Localizator\Collections\JsonKeyCollection;
+use Amirami\Localizator\Contracts\Translatable;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Support\Collection;
 use RuntimeException;
@@ -15,6 +16,11 @@ class Parser
      * @var array
      */
     private $config;
+
+    /**
+     * @var FileFinder
+     */
+    private $finder;
 
     /**
      * @var DefaultKeyCollection
@@ -30,20 +36,23 @@ class Parser
      * Parser constructor.
      *
      * @param Repository $config
+     * @param FileFinder $finder
      */
-    public function __construct(Repository $config)
+    public function __construct(Repository $config, FileFinder $finder)
     {
         $this->config = $config->get('localizator');
+        $this->finder = $finder;
         $this->defaultKeys = new DefaultKeyCollection;
         $this->jsonKeys = new JsonKeyCollection;
     }
 
     /**
-     * @param Collection $files
+     * @return void
      */
-    public function parseKeys(Collection $files): void
+    public function parseKeys(): void
     {
-        $files
+        $this->finder
+            ->getFiles()
             ->map(function (SplFileInfo $file) {
                 return $this->getStrings($file);
             })
@@ -98,9 +107,9 @@ class Parser
     /**
      * @param string $locale
      * @param string $type
-     * @return Collection
+     * @return Translatable
      */
-    public function getKeys(string $locale, string $type): Collection
+    public function getKeys(string $locale, string $type): Translatable
     {
         switch ($type) {
             case 'default':

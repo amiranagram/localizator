@@ -2,8 +2,7 @@
 
 namespace Amirami\Localizator\Commands;
 
-use Amirami\Localizator\Facades\Localizator;
-use Amirami\Localizator\Services\FileFinder;
+use Amirami\Localizator\Services\Localizator;
 use Amirami\Localizator\Services\Parser;
 use Illuminate\Console\Command;
 
@@ -26,18 +25,18 @@ class LocalizeCommand extends Command
     /**
      * Execute the localize command.
      *
-     * @param FileFinder $finder
+     * @param Localizator $localizator
      * @param Parser $parser
      * @return int
      */
-    public function handle(FileFinder $finder, Parser $parser): int
+    public function handle(Localizator $localizator, Parser $parser): int
     {
         $locales = $this->getLocales();
         $progressBar = $this->output->createProgressBar(count($locales));
 
         $this->info('Localizing: '.implode(', ', $locales));
 
-        $parser->parseKeys($finder->getFiles());
+        $parser->parseKeys();
 
         $progressBar->setFormat('%current%/%max% [%bar%] %percent:3s%% %message%');
         $progressBar->setMessage('Localizing...');
@@ -47,7 +46,7 @@ class LocalizeCommand extends Command
             $progressBar->setMessage("Localizing {$locale}...");
 
             foreach ($this->getTypes() as $type) {
-                Localizator::localize($parser->getKeys($locale, $type), $type, $locale);
+                $localizator->localize($parser->getKeys($locale, $type), $type, $locale);
             }
 
             $progressBar->advance();
