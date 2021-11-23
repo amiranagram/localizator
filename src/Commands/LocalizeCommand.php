@@ -2,13 +2,10 @@
 
 namespace Amirami\Localizator\Commands;
 
-use Amirami\Localizator\Facades\Localizator;
+use Amirami\Localizator\Services\Localizator;
+use Amirami\Localizator\Services\Parser;
 use Illuminate\Console\Command;
 
-/**
- * Class LocalizeCommand
- * @package Amirami\Localizator\Commands
- */
 class LocalizeCommand extends Command
 {
     /**
@@ -28,19 +25,18 @@ class LocalizeCommand extends Command
     /**
      * Execute the localize command.
      *
-     * @return void
+     * @param Localizator $localizator
+     * @param Parser $parser
+     * @return int
      */
-    public function handle(): void
+    public function handle(Localizator $localizator, Parser $parser): int
     {
         $locales = $this->getLocales();
         $progressBar = $this->output->createProgressBar(count($locales));
 
-        $this->info('Localizing: ' . implode(', ', $locales));
+        $this->info('Localizing: '.implode(', ', $locales));
 
-        $files = app('localizator.finder')->getFiles();
-        $parser = app('localizator.parser');
-
-        $parser->parseKeys($files);
+        $parser->parseKeys();
 
         $progressBar->setFormat('%current%/%max% [%bar%] %percent:3s%% %message%');
         $progressBar->setMessage('Localizing...');
@@ -50,7 +46,7 @@ class LocalizeCommand extends Command
             $progressBar->setMessage("Localizing {$locale}...");
 
             foreach ($this->getTypes() as $type) {
-                Localizator::localize($parser->getKeys($locale, $type), $type, $locale);
+                $localizator->localize($parser->getKeys($locale, $type), $type, $locale);
             }
 
             $progressBar->advance();
@@ -59,8 +55,10 @@ class LocalizeCommand extends Command
         $progressBar->finish();
 
         $this->info(
-            "\nTranslatable strings have been generated for locale(s): " . implode(', ', $locales)
+            "\nTranslatable strings have been generated for locale(s): ".implode(', ', $locales)
         );
+
+        return 0;
     }
 
     /**

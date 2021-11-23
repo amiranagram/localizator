@@ -9,10 +9,6 @@ use RuntimeException;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
-/**
- * Class DefaultKeyCollector
- * @package Amirami\Localizator\Services\Collectors
- */
 class DefaultKeyCollector implements Collectable
 {
     /**
@@ -40,7 +36,7 @@ class DefaultKeyCollector implements Collectable
      */
     protected function getFiles(string $locale): Collection
     {
-        $dir = resource_path('lang' . DIRECTORY_SEPARATOR . $locale);
+        $dir = resource_path('lang'.DIRECTORY_SEPARATOR.$locale);
 
         if (! file_exists($dir)) {
             if (! mkdir($dir, 0755) && ! is_dir($dir)) {
@@ -64,7 +60,7 @@ class DefaultKeyCollector implements Collectable
     protected function requireFile(string $locale, SplFileInfo $fileInfo): array
     {
         return require resource_path(
-            'lang' . DIRECTORY_SEPARATOR . $locale . DIRECTORY_SEPARATOR . $fileInfo->getRelativePathname()
+            'lang'.DIRECTORY_SEPARATOR.$locale.DIRECTORY_SEPARATOR.$fileInfo->getRelativePathname()
         );
     }
 }

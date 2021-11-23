@@ -4,10 +4,6 @@ namespace Amirami\Localizator\Tests\Concerns;
 
 use RuntimeException;
 
-/**
- * Trait CreatesTestFiles
- * @package Amirami\Localizator\Tests\Concerns
- */
 trait CreatesTestFiles
 {
     /**
@@ -32,7 +28,7 @@ trait CreatesTestFiles
     {
         $this->createTestFile(
             $contents,
-            'views' . DIRECTORY_SEPARATOR . "{$fileName}.blade.php"
+            'views'.DIRECTORY_SEPARATOR."{$fileName}.blade.php"
         );
     }
 
@@ -45,7 +41,7 @@ trait CreatesTestFiles
     {
         $this->createTestFile(
             $contents,
-            'lang' . DIRECTORY_SEPARATOR . $fileName
+            'lang'.DIRECTORY_SEPARATOR.$fileName
         );
     }
 
@@ -71,7 +67,7 @@ trait CreatesTestFiles
     protected function createTestDefaultLangFile(array $contents, string $fileName, string $locale): void
     {
         $export = sprintf("<?php\n\nreturn %s;\n", var_export($contents, true));
-        $dir = resource_path('lang' . DIRECTORY_SEPARATOR . $locale);
+        $dir = resource_path('lang'.DIRECTORY_SEPARATOR.$locale);
 
         if (! file_exists($dir) && ! mkdir($dir, 0755) && ! is_dir($dir)) {
             throw new RuntimeException(sprintf('Directory "%s" was not created', $dir));
@@ -79,7 +75,7 @@ trait CreatesTestFiles
 
         $this->createTestLangFile(
             $export,
-            $locale . DIRECTORY_SEPARATOR . "{$fileName}.php"
+            $locale.DIRECTORY_SEPARATOR."{$fileName}.php"
         );
     }
 }

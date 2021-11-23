@@ -4,20 +4,23 @@ namespace Amirami\Localizator\Services;
 
 use Amirami\Localizator\Collections\DefaultKeyCollection;
 use Amirami\Localizator\Collections\JsonKeyCollection;
+use Amirami\Localizator\Contracts\Translatable;
+use Illuminate\Contracts\Config\Repository;
 use Illuminate\Support\Collection;
 use RuntimeException;
 use Symfony\Component\Finder\SplFileInfo;
 
-/**
- * Class Parser
- * @package Amirami\Localizator\Services
- */
 class Parser
 {
     /**
      * @var array
      */
     private $config;
+
+    /**
+     * @var FileFinder
+     */
+    private $finder;
 
     /**
      * @var DefaultKeyCollection
@@ -32,21 +35,24 @@ class Parser
     /**
      * Parser constructor.
      *
-     * @param array $config
+     * @param Repository $config
+     * @param FileFinder $finder
      */
-    public function __construct(array $config)
+    public function __construct(Repository $config, FileFinder $finder)
     {
-        $this->config = $config;
+        $this->config = $config->get('localizator');
+        $this->finder = $finder;
         $this->defaultKeys = new DefaultKeyCollection;
         $this->jsonKeys = new JsonKeyCollection;
     }
 
     /**
-     * @param Collection $files
+     * @return void
      */
-    public function parseKeys(Collection $files): void
+    public function parseKeys(): void
     {
-        $files
+        $this->finder
+            ->getFiles()
             ->map(function (SplFileInfo $file) {
                 return $this->getStrings($file);
             })
@@ -69,7 +75,7 @@ class Parser
      */
     protected function isDotKey($key): bool
     {
-        return (bool)preg_match('/^[^.\s]\S*\.\S*[^.\s]$/', $key);
+        return (bool) preg_match('/^[^.\s]\S*\.\S*[^.\s]$/', $key);
     }
 
     /**
@@ -81,9 +87,7 @@ class Parser
         $keys = new Collection;
 
         foreach ($this->config['search']['functions'] as $function) {
-            if (
-            preg_match_all($this->searchPattern($function), $file->getContents(), $matches)
-            ) {
+            if (preg_match_all($this->searchPattern($function), $file->getContents(), $matches)) {
                 $keys->push($matches[2]);
             }
         }
@@ -97,15 +101,15 @@ class Parser
      */
     protected function searchPattern(string $function): string
     {
-        return '/(' . $function . ')\(\h*[\'"](.+)[\'"]\h*[),]/U';
+        return '/('.$function.')\(\h*[\'"](.+)[\'"]\h*[),]/U';
     }
 
     /**
      * @param string $locale
      * @param string $type
-     * @return Collection
+     * @return Translatable
      */
-    public function getKeys(string $locale, string $type): Collection
+    public function getKeys(string $locale, string $type): Translatable
     {
         switch ($type) {
             case 'default':

@@ -5,17 +5,11 @@ namespace Amirami\Localizator;
 use Amirami\Localizator\Commands\LocalizeCommand;
 use Amirami\Localizator\Services\Collectors\DefaultKeyCollector;
 use Amirami\Localizator\Services\Collectors\JsonKeyCollector;
-use Amirami\Localizator\Services\FileFinder;
 use Amirami\Localizator\Services\Localizator;
-use Amirami\Localizator\Services\Parser;
 use Amirami\Localizator\Services\Writers\DefaultWriter;
 use Amirami\Localizator\Services\Writers\JsonWriter;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
-/**
- * Class ServiceProvider
- * @package Amirami\Localizator
- */
 class ServiceProvider extends BaseServiceProvider
 {
     /**
@@ -48,14 +42,6 @@ class ServiceProvider extends BaseServiceProvider
     private function registerContainerClasses(): void
     {
         $this->app->singleton('localizator', Localizator::class);
-
-        $this->app->singleton('localizator.finder', function ($app) {
-            return new FileFinder($app['config']['localizator']);
-        });
-
-        $this->app->singleton('localizator.parser', function ($app) {
-            return new Parser($app['config']['localizator']);
-        });
 
         $this->app->bind('localizator.writers.default', DefaultWriter::class);
         $this->app->bind('localizator.writers.json', JsonWriter::class);

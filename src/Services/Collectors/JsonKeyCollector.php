@@ -6,10 +6,6 @@ use Amirami\Localizator\Collections\JsonKeyCollection;
 use Amirami\Localizator\Contracts\Collectable;
 use Illuminate\Support\Collection;
 
-/**
- * Class JsonKeyCollector
- * @package Amirami\Localizator\Services\Collectors
- */
 class JsonKeyCollector implements Collectable
 {
     /**
@@ -18,7 +14,7 @@ class JsonKeyCollector implements Collectable
      */
     public function getTranslated(string $locale): Collection
     {
-        $file = resource_path('lang' . DIRECTORY_SEPARATOR . "{$locale}.json");
+        $file = resource_path('lang'.DIRECTORY_SEPARATOR."{$locale}.json");
 
         if (! file_exists($file)) {
             return new JsonKeyCollection;

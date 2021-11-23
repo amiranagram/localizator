@@ -2,13 +2,10 @@
 
 namespace Amirami\Localizator\Services;
 
+use Illuminate\Contracts\Config\Repository;
 use Illuminate\Support\Collection;
 use Symfony\Component\Finder\Finder;
 
-/**
- * Class FileFinder
- * @package Amirami\Localizator\Services
- */
 class FileFinder
 {
     /**
@@ -18,11 +15,12 @@ class FileFinder
 
     /**
      * FileFinder constructor.
-     * @param array $config
+     *
+     * @param Repository $config
      */
-    public function __construct(array $config)
+    public function __construct(Repository $config)
     {
-        $this->config = $config;
+        $this->config = $config->get('localizator');
     }
 
     /**

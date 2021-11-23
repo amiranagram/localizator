@@ -20,7 +20,7 @@ class DefaultKeyCollection extends Translatable
      * @param mixed $items
      * @return static
      */
-    public function merge($items): DefaultKeyCollection
+    public function merge($items): self
     {
         return parent::merge(Arr::dot($items));
     }

@@ -6,9 +6,6 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * Class Localizator
- * @package Amirami\Localizator\Facades
- *
  * @method static void localize(Collection $keys, string $type, string $locale)
  * @see \Amirami\Localizator\Services\Localizator
  */

@@ -6,30 +6,32 @@ use Amirami\Localizator\Contracts\Collectable;
 use Amirami\Localizator\Contracts\Translatable;
 use Amirami\Localizator\Contracts\Writable;
 
-/**
- * Class Localizator
- * @package Amirami\Localizator\Services
- */
 class Localizator
 {
     /**
      * @param Translatable $keys
      * @param string $type
-     * @param $locale
+     * @param string $locale
      * @return void
-     * @noinspection CallableParameterUseCaseInTypeContextInspection
      */
-    public function localize(Translatable $keys, string $type, $locale): void
+    public function localize(Translatable $keys, string $type, string $locale): void
     {
-        $translated = $this->getCollector($type)->getTranslated($locale);
+        $this->getWriter($type)->put($locale, $this->collect($keys, $type, $locale));
+    }
 
-        $keys = $keys
-            ->merge($translated)
+    /**
+     * @param Translatable $keys
+     * @param string $type
+     * @param string $locale
+     * @return Translatable
+     */
+    protected function collect(Translatable $keys, string $type, string $locale): Translatable
+    {
+        return $keys
+            ->merge($this->getCollector($type)->getTranslated($locale))
             ->when(config('localizator.sort'), function (Translatable $keyCollection) {
                 return $keyCollection->sortAlphabetically();
             });
-
-        $this->getWriter($type)->put($locale, $keys);
     }
 
     /**
