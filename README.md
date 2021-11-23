@@ -2,7 +2,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/amirami/localizator.svg?style=flat-square)](https://packagist.org/packages/amirami/localizator)
 [![Total Downloads](https://img.shields.io/packagist/dt/amirami/localizator.svg?style=flat-square)](https://packagist.org/packages/amirami/localizator)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/amiranagram/localizator/Tests?label=tests&style=flat-square)](https://github.com/amiranagram/localizator/actions?query=workflow%3ATests+branch%3Amaster)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/amiranagram/localizator/tests?label=tests&style=flat-square)](https://github.com/amiranagram/localizator/actions?query=workflow%3Atests+branch%3Amaster)
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/amiranagram/localizator/Check%20&%20fix%20styling?label=code%20style&style=flat-square)](https://github.com/amiranagram/localizator/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amaster)
 
 Localizator is a small tool for Laravel that gives you the ability to extract untranslated string from your project files with one command.
