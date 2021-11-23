@@ -4,9 +4,6 @@ namespace Amirami\Localizator\Tests\Concerns;
 
 use RuntimeException;
 
-/**
- * Trait CreatesTestFiles.
- */
 trait CreatesTestFiles
 {
     /**

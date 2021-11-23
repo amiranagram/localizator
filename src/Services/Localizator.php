@@ -6,9 +6,6 @@ use Amirami\Localizator\Contracts\Collectable;
 use Amirami\Localizator\Contracts\Translatable;
 use Amirami\Localizator\Contracts\Writable;
 
-/**
- * Class Localizator.
- */
 class Localizator
 {
     /**

@@ -6,9 +6,6 @@ use Amirami\Localizator\Collections\JsonKeyCollection;
 use Amirami\Localizator\Contracts\Collectable;
 use Illuminate\Support\Collection;
 
-/**
- * Class JsonKeyCollector.
- */
 class JsonKeyCollector implements Collectable
 {
     /**

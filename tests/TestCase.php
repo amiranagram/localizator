@@ -8,9 +8,6 @@ use Amirami\Localizator\Tests\Concerns\ImportsLangFiles;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Symfony\Component\Finder\Finder;
 
-/**
- * Class TestCase.
- */
 class TestCase extends Orchestra
 {
     use CreatesTestFiles;

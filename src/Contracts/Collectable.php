@@ -4,9 +4,6 @@ namespace Amirami\Localizator\Contracts;
 
 use Illuminate\Support\Collection;
 
-/**
- * Interface Collectable.
- */
 interface Collectable
 {
     /**

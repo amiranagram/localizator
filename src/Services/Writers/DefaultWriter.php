@@ -8,9 +8,6 @@ use Amirami\Localizator\Contracts\Writable;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
 
-/**
- * Class DefaultWriter.
- */
 class DefaultWriter implements Writable
 {
     /**

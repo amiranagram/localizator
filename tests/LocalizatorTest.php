@@ -2,9 +2,6 @@
 
 namespace Amirami\Localizator\Tests;
 
-/**
- * Class LocalizatorTest.
- */
 class LocalizatorTest extends TestCase
 {
     /**

@@ -9,9 +9,6 @@ use RuntimeException;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
-/**
- * Class DefaultKeyCollector.
- */
 class DefaultKeyCollector implements Collectable
 {
     /**

@@ -10,9 +10,6 @@ use Amirami\Localizator\Services\Writers\DefaultWriter;
 use Amirami\Localizator\Services\Writers\JsonWriter;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
-/**
- * Class ServiceProvider.
- */
 class ServiceProvider extends BaseServiceProvider
 {
     /**

@@ -2,9 +2,6 @@
 
 namespace Amirami\Localizator\Tests\Concerns;
 
-/**
- * Trait ImportsLangFiles.
- */
 trait ImportsLangFiles
 {
     /**

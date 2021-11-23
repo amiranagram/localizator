@@ -2,9 +2,6 @@
 
 namespace Amirami\Localizator\Contracts;
 
-/**
- * Interface Writable.
- */
 interface Writable
 {
     /**
