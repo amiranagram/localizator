@@ -5,9 +5,12 @@ namespace Amirami\Localizator\Commands;
 use Amirami\Localizator\Services\Localizator;
 use Amirami\Localizator\Services\Parser;
 use Illuminate\Console\Command;
+use Illuminate\Console\ConfirmableTrait;
 
 class LocalizeCommand extends Command
 {
+    use ConfirmableTrait;
+
     /**
      * The name and signature of the console command.
      *
@@ -31,6 +34,10 @@ class LocalizeCommand extends Command
      */
     public function handle(Localizator $localizator, Parser $parser): int
     {
+        if (! $this->confirmToProceed()) {
+            return 1;
+        }
+
         $locales = $this->getLocales();
         $progressBar = $this->output->createProgressBar(count($locales));
 
