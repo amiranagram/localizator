@@ -9,8 +9,7 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
 
 /**
- * Class DefaultWriter
- * @package Amirami\Localizator\Services\Writers
+ * Class DefaultWriter.
  */
 class DefaultWriter implements Writable
 {
@@ -77,6 +76,6 @@ class DefaultWriter implements Writable
      */
     protected function getFile(string $locale, string $fileName): string
     {
-        return resource_path('lang' . DIRECTORY_SEPARATOR . $locale . DIRECTORY_SEPARATOR . $fileName . '.php');
+        return resource_path('lang'.DIRECTORY_SEPARATOR.$locale.DIRECTORY_SEPARATOR.$fileName.'.php');
     }
 }

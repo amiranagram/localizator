@@ -3,8 +3,7 @@
 namespace Amirami\Localizator\Tests\Concerns;
 
 /**
- * Trait ImportsLangFiles
- * @package Amirami\Localizator\Tests\Concerns
+ * Trait ImportsLangFiles.
  */
 trait ImportsLangFiles
 {
@@ -14,7 +13,7 @@ trait ImportsLangFiles
      */
     protected function getLangFilePath(string $fileName): string
     {
-        return resource_path('lang' . DIRECTORY_SEPARATOR . $fileName);
+        return resource_path('lang'.DIRECTORY_SEPARATOR.$fileName);
     }
 
     /**
@@ -25,7 +24,7 @@ trait ImportsLangFiles
      */
     protected function getDefaultLangContents(string $locale, string $fileName): array
     {
-        return require $this->getLangFilePath($locale . DIRECTORY_SEPARATOR . "{$fileName}.php");
+        return require $this->getLangFilePath($locale.DIRECTORY_SEPARATOR."{$fileName}.php");
     }
 
     /**

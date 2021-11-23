@@ -7,8 +7,7 @@ use Amirami\Localizator\Contracts\Translatable;
 use Amirami\Localizator\Contracts\Writable;
 
 /**
- * Class Localizator
- * @package Amirami\Localizator\Services
+ * Class Localizator.
  */
 class Localizator
 {

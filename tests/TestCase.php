@@ -9,8 +9,7 @@ use Orchestra\Testbench\TestCase as Orchestra;
 use Symfony\Component\Finder\Finder;
 
 /**
- * Class TestCase
- * @package Amirami\Localizator\Tests
+ * Class TestCase.
  */
 class TestCase extends Orchestra
 {
@@ -59,7 +58,7 @@ class TestCase extends Orchestra
      */
     public function getEnvironmentSetUp($app): void
     {
-        $app->setBasePath(__DIR__ . DIRECTORY_SEPARATOR . 'Mock');
+        $app->setBasePath(__DIR__.DIRECTORY_SEPARATOR.'Mock');
     }
 
     /**
@@ -70,7 +69,7 @@ class TestCase extends Orchestra
     protected static function assertLangFileExists(string $fileName, string $message = ''): void
     {
         static::assertFileExists(
-            resource_path('lang' . DIRECTORY_SEPARATOR . $fileName),
+            resource_path('lang'.DIRECTORY_SEPARATOR.$fileName),
             $message
         );
     }
@@ -86,7 +85,7 @@ class TestCase extends Orchestra
 
         foreach ($locales as $locale) {
             foreach ($fileNames as $fileName) {
-                static::assertLangFileExists($locale . DIRECTORY_SEPARATOR . "{$fileName}.php", $message);
+                static::assertLangFileExists($locale.DIRECTORY_SEPARATOR."{$fileName}.php", $message);
             }
         }
     }

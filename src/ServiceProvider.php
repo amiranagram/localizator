@@ -11,8 +11,7 @@ use Amirami\Localizator\Services\Writers\JsonWriter;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 /**
- * Class ServiceProvider
- * @package Amirami\Localizator
+ * Class ServiceProvider.
  */
 class ServiceProvider extends BaseServiceProvider
 {

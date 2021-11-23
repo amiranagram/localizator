@@ -5,8 +5,7 @@ namespace Amirami\Localizator\Contracts;
 use Illuminate\Support\Collection;
 
 /**
- * Class Translatable
- * @package Amirami\Localizator\Contracts
+ * Class Translatable.
  */
 abstract class Translatable extends Collection
 {

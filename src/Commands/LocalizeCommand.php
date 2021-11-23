@@ -35,7 +35,7 @@ class LocalizeCommand extends Command
         $locales = $this->getLocales();
         $progressBar = $this->output->createProgressBar(count($locales));
 
-        $this->info('Localizing: ' . implode(', ', $locales));
+        $this->info('Localizing: '.implode(', ', $locales));
 
         $parser->parseKeys($finder->getFiles());
 
@@ -56,7 +56,7 @@ class LocalizeCommand extends Command
         $progressBar->finish();
 
         $this->info(
-            "\nTranslatable strings have been generated for locale(s): " . implode(', ', $locales)
+            "\nTranslatable strings have been generated for locale(s): ".implode(', ', $locales)
         );
 
         return 0;

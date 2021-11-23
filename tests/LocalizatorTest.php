@@ -3,8 +3,7 @@
 namespace Amirami\Localizator\Tests;
 
 /**
- * Class LocalizatorTest
- * @package Amirami\Localizator\Tests
+ * Class LocalizatorTest.
  */
 class LocalizatorTest extends TestCase
 {
