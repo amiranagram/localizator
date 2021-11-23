@@ -70,9 +70,10 @@ return [
         /**
          * Short keys. This is the default for Laravel.
          * They are stored in PHP files inside folders name by their locale code.
-         * Laravel installation comes with default: auth.php, pagination.php, passwords.php and validation.php
+         * Laravel comes with default: auth.php, pagination.php, passwords.php and validation.php
          */
         'default' => true,
+
         /**
          * Translations strings as key.
          * They are stored in JSON file for each locale.
@@ -91,7 +92,7 @@ return [
 
         /**
          * Patterns by which files should be queried.
-         * The values can be a regular expresion, glob, or just a string.
+         * The values can be a regular expression, glob, or just a string.
          */
         'patterns'  => ['*.php'],
 
