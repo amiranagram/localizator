@@ -49,14 +49,6 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->app->singleton('localizator', Localizator::class);
 
-        $this->app->singleton('localizator.finder', function ($app) {
-            return new FileFinder($app['config']['localizator']);
-        });
-
-        $this->app->singleton('localizator.parser', function ($app) {
-            return new Parser($app['config']['localizator']);
-        });
-
         $this->app->bind('localizator.writers.default', DefaultWriter::class);
         $this->app->bind('localizator.writers.json', JsonWriter::class);
 

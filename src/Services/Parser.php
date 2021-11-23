@@ -4,14 +4,11 @@ namespace Amirami\Localizator\Services;
 
 use Amirami\Localizator\Collections\DefaultKeyCollection;
 use Amirami\Localizator\Collections\JsonKeyCollection;
+use Illuminate\Contracts\Config\Repository;
 use Illuminate\Support\Collection;
 use RuntimeException;
 use Symfony\Component\Finder\SplFileInfo;
 
-/**
- * Class Parser
- * @package Amirami\Localizator\Services
- */
 class Parser
 {
     /**
@@ -32,11 +29,11 @@ class Parser
     /**
      * Parser constructor.
      *
-     * @param array $config
+     * @param Repository $config
      */
-    public function __construct(array $config)
+    public function __construct(Repository $config)
     {
-        $this->config = $config;
+        $this->config = $config->get('localizator');
         $this->defaultKeys = new DefaultKeyCollection;
         $this->jsonKeys = new JsonKeyCollection;
     }
@@ -69,7 +66,7 @@ class Parser
      */
     protected function isDotKey($key): bool
     {
-        return (bool)preg_match('/^[^.\s]\S*\.\S*[^.\s]$/', $key);
+        return (bool) preg_match('/^[^.\s]\S*\.\S*[^.\s]$/', $key);
     }
 
     /**
@@ -81,9 +78,7 @@ class Parser
         $keys = new Collection;
 
         foreach ($this->config['search']['functions'] as $function) {
-            if (
-            preg_match_all($this->searchPattern($function), $file->getContents(), $matches)
-            ) {
+            if (preg_match_all($this->searchPattern($function), $file->getContents(), $matches)) {
                 $keys->push($matches[2]);
             }
         }
