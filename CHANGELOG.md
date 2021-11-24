@@ -2,6 +2,14 @@
 
 All notable changes to `amirami/localizator` will be documented in this file.
 
+## v0.7.1-alpha
+
+### Added
+- Confirm usage of localize command in production by @amiranagram in https://github.com/amiranagram/localizator/pull/24
+
+### Changed
+- Use `testbench:^4.0` for Laravel 6.* LTS by @amiranagram in https://github.com/amiranagram/localizator/pull/25
+
 ## v0.7.0-alpha
 
 ### Changed
