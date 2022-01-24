@@ -189,4 +189,20 @@ class LocalizatorTest extends TestCase
         // Cleanup.
         self::flushDirectories('lang', 'views');
     }
+
+    public function testLocalizeCommandReturnsNonZeroCodeThenZeroCodeIfFileDidNotChangedBetweenTwoRun(): void
+    {
+        $this->createTestView("{{ __('Hi mom') }}");
+
+        // Run localize command.
+        $this->artisan('localize', ['--ci' => true])
+            ->assertExitCode(1);
+
+        // Run localize command.
+        $this->artisan('localize', ['--ci' => true])
+            ->assertExitCode(0);
+
+        // Cleanup.
+        self::flushDirectories('lang', 'views');
+    }
 }
