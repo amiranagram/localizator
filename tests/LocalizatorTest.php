@@ -165,4 +165,28 @@ class LocalizatorTest extends TestCase
         // Cleanup.
         self::flushDirectories('lang', 'views');
     }
+
+    public function testLocalizeCommandReturnsNonZeroCodeWhenCiFlagIsOnAndSomeMissingTranslationsHaveBeenAdded(): void
+    {
+        $this->createTestView("{{ __('Hi mom') }}");
+
+        // Run localize command.
+        $this->artisan('localize', ['--ci' => true])
+            ->assertExitCode(1);
+
+        // Cleanup.
+        self::flushDirectories('lang', 'views');
+    }
+
+    public function testLocalizeCommandReturnsZeroCodeWhenCiFlagIsOnAndNoMissingTranslationsHaveBeenFound(): void
+    {
+        $this->createTestView("");
+
+        // Run localize command.
+        $this->artisan('localize', ['--ci' => true])
+            ->assertExitCode(0);
+
+        // Cleanup.
+        self::flushDirectories('lang', 'views');
+    }
 }

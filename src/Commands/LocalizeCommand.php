@@ -16,7 +16,7 @@ class LocalizeCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'localize {lang?}';
+    protected $signature = 'localize {lang?} {--c|ci : Returns a non zero code when some translations have been added.}';
 
     /**
      * The console command description.
@@ -65,7 +65,7 @@ class LocalizeCommand extends Command
             "\nTranslatable strings have been generated for locale(s): ".implode(', ', $locales)
         );
 
-        return 0;
+        return $this->option("ci") && $parser->foundSomeKeys() ? 1 : 0;
     }
 
     /**

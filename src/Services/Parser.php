@@ -69,6 +69,11 @@ class Parser
             });
     }
 
+    public function foundSomeKeys(): bool
+    {
+        return ($this->defaultKeys->count() + $this->jsonKeys->count()) > 0;
+    }
+
     /**
      * @param $key
      * @return bool
