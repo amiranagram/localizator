@@ -66,7 +66,7 @@ class TestCase extends Orchestra
     protected static function assertLangFileExists(string $fileName, string $message = ''): void
     {
         static::assertFileExists(
-            resource_path('lang'.DIRECTORY_SEPARATOR.$fileName),
+            lang_path($fileName),
             $message
         );
     }

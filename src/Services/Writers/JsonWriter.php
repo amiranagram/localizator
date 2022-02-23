@@ -14,7 +14,7 @@ class JsonWriter implements Writable
      */
     public function put(string $locale, Translatable $keys): void
     {
-        $file = resource_path('lang'.DIRECTORY_SEPARATOR."{$locale}.json");
+        $file = lang_path("{$locale}.json");
 
         (new Filesystem)->put(
             $file,

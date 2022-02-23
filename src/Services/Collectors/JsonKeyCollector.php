@@ -14,7 +14,7 @@ class JsonKeyCollector implements Collectable
      */
     public function getTranslated(string $locale): Collection
     {
-        $file = resource_path('lang'.DIRECTORY_SEPARATOR."{$locale}.json");
+        $file = lang_path("{$locale}.json");
 
         if (! file_exists($file)) {
             return new JsonKeyCollection;

@@ -39,9 +39,9 @@ trait CreatesTestFiles
      */
     protected function createTestLangFile(string $contents, string $fileName): void
     {
-        $this->createTestFile(
-            $contents,
-            'lang'.DIRECTORY_SEPARATOR.$fileName
+        file_put_contents(
+            lang_path($fileName),
+            $contents
         );
     }
 
@@ -67,7 +67,7 @@ trait CreatesTestFiles
     protected function createTestDefaultLangFile(array $contents, string $fileName, string $locale): void
     {
         $export = sprintf("<?php\n\nreturn %s;\n", var_export($contents, true));
-        $dir = resource_path('lang'.DIRECTORY_SEPARATOR.$locale);
+        $dir = lang_path($locale);
 
         if (! file_exists($dir) && ! mkdir($dir, 0755) && ! is_dir($dir)) {
             throw new RuntimeException(sprintf('Directory "%s" was not created', $dir));
