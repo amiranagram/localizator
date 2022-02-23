@@ -2,12 +2,20 @@
 
 All notable changes to `amirami/localizator` will be documented in this file.
 
+## 0.8.0 - 2022-02-15
+
+## Added
+
+- Added support for Laravel 9 by @musmanikram in https://github.com/amiranagram/localizator/pull/32
+
 ## v0.7.1-alpha
 
 ### Added
+
 - Confirm usage of localize command in production.
 
 ### Changed
+
 - Use `testbench:^4.0` for Laravel 6.* LTS.
 
 ## v0.7.0-alpha
@@ -51,14 +59,17 @@ All notable changes to `amirami/localizator` will be documented in this file.
 ## v0.3.0-alpha
 
 ### Added
+
 - Laravel 6 LTS support.
 
 ## v0.2.0-alpha
 
 ### Added
+
 - Basic tests.
 
 ### Changed
+
 - Small improvements using paths.
 - Documentation.
 - Dependencies.
