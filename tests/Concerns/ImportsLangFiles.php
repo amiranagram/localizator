@@ -10,7 +10,7 @@ trait ImportsLangFiles
      */
     protected function getLangFilePath(string $fileName): string
     {
-        return resource_path('lang'.DIRECTORY_SEPARATOR.$fileName);
+        return lang_path($fileName);
     }
 
     /**
