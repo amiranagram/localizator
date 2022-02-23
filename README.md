@@ -13,6 +13,14 @@ Localizator is a small tool for Laravel that gives you the ability to extract un
 
 [![DigitalOcean Referral Badge](https://web-platforms.sfo2.digitaloceanspaces.com/WWW/Badge%203.svg)](https://www.digitalocean.com/?refcode=f38828dd20f8&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge)
 
+## Compatibility
+
+| Laravel | Localizator |
+|---------|-------------|
+| 6.x LTS | ^0.3        |
+| 8.x     | *           |
+| 9.x     | ^0.8        |
+
 ## Installation
 
 You can install the package via composer:
