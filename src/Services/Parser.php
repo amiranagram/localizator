@@ -101,7 +101,7 @@ class Parser
      */
     protected function searchPattern(string $function): string
     {
-        return '/('.$function.')\(\h*[\'"](.+)[\'"]\h*[),]/U';
+        return '/(' . $function . ')\([\r\n\s]{0,}\h*[\'"](.+)[\'"]\h*[\r\n\s]{0,}[),]/U';
     }
 
     /**
