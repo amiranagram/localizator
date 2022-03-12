@@ -165,4 +165,50 @@ class LocalizatorTest extends TestCase
         // Cleanup.
         self::flushDirectories('lang', 'views');
     }
+
+    public function testLocalizeCommandWithMultilineMessages(): void
+    {
+        $this->createTestView("__(\n'stand with ukraine'\n)");
+
+        // Run localize command.
+        $this->artisan('localize')
+            ->assertExitCode(0);
+
+        // Do created locale files exist?
+        self::assertJsonLangFilesExist('en');
+
+        // Do their contents match the expected results?
+        $enJsonContents = $this->getJsonLangContents('en');
+
+        // Did it sort the translation keys like we expected?
+        self::assertSame([
+            'stand with ukraine' => 'stand with ukraine',
+        ], $enJsonContents);
+
+        // Cleanup.
+        self::flushDirectories('lang', 'views');
+    }
+
+    public function testLocalizeCommandWithMultilineMessagesAndSpaces(): void
+    {
+        $this->createTestView("{{ __(\n   'stand with ukraine'   \n) }}");
+
+        // Run localize command.
+        $this->artisan('localize')
+            ->assertExitCode(0);
+
+        // Do created locale files exist?
+        self::assertJsonLangFilesExist('en');
+
+        // Do their contents match the expected results?
+        $enJsonContents = $this->getJsonLangContents('en');
+
+        // Did it sort the translation keys like we expected?
+        self::assertSame([
+            'stand with ukraine' => 'stand with ukraine',
+        ], $enJsonContents);
+
+        // Cleanup.
+        self::flushDirectories('lang', 'views');
+    }
 }
