@@ -2,6 +2,12 @@
 
 All notable changes to `amirami/localizator` will be documented in this file.
 
+## 0.9.0 - 2022-03-12
+
+## Changed
+
+- Add support for newlines and spaces by @rexlManu in https://github.com/amiranagram/localizator/pull/35
+
 ## 0.8.1 - 2022-02-23
 
 ## Changed
