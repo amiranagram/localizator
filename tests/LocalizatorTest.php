@@ -239,8 +239,7 @@ class LocalizatorTest extends TestCase
         // Get exported contents.
         $path = $this->getLangFilePath('en'.DIRECTORY_SEPARATOR.'errors.php');
         $contents = file_get_contents($path);
-
-        $this->assertSame(<<<'PHP'
+        $expected = <<<'PHP'
 <?php
 
 return [
@@ -254,8 +253,9 @@ return [
     ],
 ];
 
-PHP
-            , $contents);
+PHP;
+
+        $this->assertSame(preg_replace('/\r\n|\r|\n/', "\n", $expected), $contents);
     }
 
     public function testIntTranslationNestedKeysAreBeingSavedAsStrings(): void
@@ -281,8 +281,7 @@ PHP
         // Get exported contents.
         $path = $this->getLangFilePath('en'.DIRECTORY_SEPARATOR.'errors.php');
         $contents = file_get_contents($path);
-
-        $this->assertSame(<<<'PHP'
+        $expected = <<<'PHP'
 <?php
 
 return [
@@ -292,7 +291,8 @@ return [
     ],
 ];
 
-PHP
-            , $contents);
+PHP;
+
+        $this->assertSame(preg_replace('/\r\n|\r|\n/', "\n", $expected), $contents);
     }
 }
