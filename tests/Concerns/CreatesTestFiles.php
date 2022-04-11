@@ -2,6 +2,7 @@
 
 namespace Amirami\Localizator\Tests\Concerns;
 
+use Amirami\Localizator\Services\Writers\DefaultWriter;
 use RuntimeException;
 
 trait CreatesTestFiles
@@ -66,7 +67,8 @@ trait CreatesTestFiles
      */
     protected function createTestDefaultLangFile(array $contents, string $fileName, string $locale): void
     {
-        $export = sprintf("<?php\n\nreturn %s;\n", var_export($contents, true));
+        $writer = app(DefaultWriter::class);
+        $export = $writer->exportArray($contents);
         $dir = lang_path($locale);
 
         if (! file_exists($dir) && ! mkdir($dir, 0755) && ! is_dir($dir)) {
