@@ -7,9 +7,20 @@ use Amirami\Localizator\Contracts\Translatable;
 use Amirami\Localizator\Contracts\Writable;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class DefaultWriter implements Writable
 {
+    /**
+     * @var string
+     */
+    protected $tempUuid;
+
+    public function __construct()
+    {
+        $this->tempUuid = Str::uuid();
+    }
+
     /**
      * @param string $locale
      * @param Translatable $keys
@@ -46,9 +57,9 @@ class DefaultWriter implements Writable
      * @param array $contents
      * @return string
      */
-    protected function exportArray(array $contents): string
+    public function exportArray(array $contents): string
     {
-        $export = var_export($contents, true);
+        $export = var_export($this->temporarilyModifyIntKeys($contents), true);
 
         $patterns = [
             "/array \(/" => '[',
@@ -63,7 +74,7 @@ class DefaultWriter implements Writable
             $export
         );
 
-        return sprintf("<?php\n\nreturn %s;\n", $export);
+        return sprintf("<?php\n\nreturn %s;\n", str_replace("_$this->tempUuid", '', $export));
     }
 
     /**
@@ -74,5 +85,27 @@ class DefaultWriter implements Writable
     protected function getFile(string $locale, string $fileName): string
     {
         return lang_path($locale.DIRECTORY_SEPARATOR.$fileName.'.php');
+    }
+
+    /**
+     * @param array $contents
+     * @return array
+     */
+    public function temporarilyModifyIntKeys(array $contents): array
+    {
+        $collection = collect($contents)
+            ->mapWithKeys(function ($value, $key) {
+                if (is_int($key)) {
+                    $key .= '_'.$this->tempUuid;
+                }
+
+                if (is_array($value)) {
+                    $value = $this->temporarilyModifyIntKeys($value);
+                }
+
+                return [$key => $value];
+            });
+
+        return $collection->toArray();
     }
 }

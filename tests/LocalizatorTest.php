@@ -211,4 +211,88 @@ class LocalizatorTest extends TestCase
         // Cleanup.
         self::flushDirectories('lang', 'views');
     }
+
+    public function testIntTranslationKeysAreBeingSavedAsStrings(): void
+    {
+        $this->createTestView("{{ __('errors.401.title') }}<br/>{{ __('errors.401.message') }}");
+
+        $this->createTestDefaultLangFile([
+            '401' => [
+                'title' => '401 - Unauthorized',
+                'message' => 'Sorry, you are not authorized to view this page.',
+            ],
+            '404' => [
+                'title' => '404 - Page Not Found',
+                'message' => 'Sorry, we couldn\'t find this page.',
+            ],
+        ], 'errors', 'en');
+
+        config(['localizator.sort' => false]);
+
+        // Run localize command.
+        $this->artisan('localize', ['lang' => 'en'])
+            ->assertExitCode(0);
+
+        // Do created locale files exist?
+        self::assertDefaultLangFilesExist(['en'], ['errors']);
+
+        // Get exported contents.
+        $path = $this->getLangFilePath('en'.DIRECTORY_SEPARATOR.'errors.php');
+        $contents = file_get_contents($path);
+        $expected = <<<'PHP'
+<?php
+
+return [
+    '401' => [
+        'title' => '401 - Unauthorized',
+        'message' => 'Sorry, you are not authorized to view this page.',
+    ],
+    '404' => [
+        'title' => '404 - Page Not Found',
+        'message' => 'Sorry, we couldn\'t find this page.',
+    ],
+];
+
+PHP;
+
+        $this->assertSame(preg_replace('/\r\n|\r|\n/', "\n", $expected), $contents);
+    }
+
+    public function testIntTranslationNestedKeysAreBeingSavedAsStrings(): void
+    {
+        $this->createTestView("{{ __('errors.4.401') }}<br/>{{ __('errors.4.404') }}");
+
+        $this->createTestDefaultLangFile([
+            '4' => [
+                '401' => '401 - Unauthorized',
+                '404' => '404 - Page Not Found',
+            ],
+        ], 'errors', 'en');
+
+        config(['localizator.sort' => false]);
+
+        // Run localize command.
+        $this->artisan('localize', ['lang' => 'en'])
+            ->assertExitCode(0);
+
+        // Do created locale files exist?
+        self::assertDefaultLangFilesExist(['en'], ['errors']);
+
+        // Get exported contents.
+        $path = $this->getLangFilePath('en'.DIRECTORY_SEPARATOR.'errors.php');
+        $contents = file_get_contents($path);
+        $expected = <<<'PHP'
+<?php
+
+return [
+    '4' => [
+        '401' => '401 - Unauthorized',
+        '404' => '404 - Page Not Found',
+    ],
+];
+
+PHP;
+
+        $this->assertSame(preg_replace('/\r\n|\r|\n/', "\n", $expected), $contents);
+    }
 }
