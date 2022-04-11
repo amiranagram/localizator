@@ -96,7 +96,7 @@ class DefaultWriter implements Writable
         $collection = collect($contents)
             ->mapWithKeys(function ($value, $key) {
                 if (is_int($key)) {
-                    $key .= '_' . $this->tempUuid;
+                    $key .= '_'.$this->tempUuid;
                 }
 
                 if (is_array($value)) {

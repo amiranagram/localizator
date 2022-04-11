@@ -224,7 +224,7 @@ class LocalizatorTest extends TestCase
             '404' => [
                 'title' => '404 - Page Not Found',
                 'message' => 'Sorry, we couldn\'t find this page.',
-            ]
+            ],
         ], 'errors', 'en');
 
         config(['localizator.sort' => false]);
@@ -237,7 +237,7 @@ class LocalizatorTest extends TestCase
         self::assertDefaultLangFilesExist(['en'], ['errors']);
 
         // Get exported contents.
-        $path = $this->getLangFilePath('en'.DIRECTORY_SEPARATOR."errors.php");
+        $path = $this->getLangFilePath('en'.DIRECTORY_SEPARATOR.'errors.php');
         $contents = file_get_contents($path);
 
         $this->assertSame(<<<'PHP'
@@ -279,7 +279,7 @@ PHP
         self::assertDefaultLangFilesExist(['en'], ['errors']);
 
         // Get exported contents.
-        $path = $this->getLangFilePath('en'.DIRECTORY_SEPARATOR."errors.php");
+        $path = $this->getLangFilePath('en'.DIRECTORY_SEPARATOR.'errors.php');
         $contents = file_get_contents($path);
 
         $this->assertSame(<<<'PHP'
