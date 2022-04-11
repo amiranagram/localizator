@@ -2,6 +2,12 @@
 
 All notable changes to `amirami/localizator` will be documented in this file.
 
+## 0.9.1 - 2022-04-11
+
+## Changed
+
+- Keep numbered keys as strings in PHP lang files by @amiranagram in https://github.com/amiranagram/localizator/pull/37
+
 ## 0.9.0 - 2022-03-12
 
 ## Changed
