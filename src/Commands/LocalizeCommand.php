@@ -16,7 +16,7 @@ class LocalizeCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'localize {lang?}';
+    protected $signature = 'localize {lang?} {--remove-missing}';
 
     /**
      * The console command description.
@@ -41,7 +41,7 @@ class LocalizeCommand extends Command
         $locales = $this->getLocales();
         $progressBar = $this->output->createProgressBar(count($locales));
 
-        $this->info('Localizing: '.implode(', ', $locales));
+        $this->info('Localizing: ' . implode(', ', $locales));
 
         $parser->parseKeys();
 
@@ -53,7 +53,12 @@ class LocalizeCommand extends Command
             $progressBar->setMessage("Localizing {$locale}...");
 
             foreach ($this->getTypes() as $type) {
-                $localizator->localize($parser->getKeys($locale, $type), $type, $locale);
+                $localizator->localize(
+                    $parser->getKeys($locale, $type),
+                    $type,
+                    $locale,
+                    $this->option('remove-missing')
+                );
             }
 
             $progressBar->advance();
@@ -62,7 +67,7 @@ class LocalizeCommand extends Command
         $progressBar->finish();
 
         $this->info(
-            "\nTranslatable strings have been generated for locale(s): ".implode(', ', $locales)
+            "\nTranslatable strings have been generated for locale(s): " . implode(', ', $locales)
         );
 
         return 0;

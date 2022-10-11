@@ -295,4 +295,42 @@ PHP;
 
         $this->assertSame(preg_replace('/\r\n|\r|\n/', "\n", $expected), $contents);
     }
+
+    public function testRemoveMissingKeys(): void
+    {
+        self::flushDirectories('lang', 'views');
+
+        $this->createTestDefaultLangFile([
+            'missingstring' => 'Missing',
+            'name' => 'Name'
+        ], 'app', 'en');
+        $this->createTestJsonLangFile([
+            'Login' => 'Login',
+            'Missing' => 'Missing',
+        ], 'en');
+
+        $enDefaultContents = $this->getDefaultLangContents('en', 'app');
+        $enJsonContents = $this->getJsonLangContents('en');
+        self::assertSame(['missingstring' => 'Missing', 'name' => 'Name'], $enDefaultContents);
+        self::assertSame(['Login' => 'Login', 'Missing' => 'Missing'], $enJsonContents);
+
+        $this->createTestView("{{ __('Login') }} {{ __('app.name') }}");
+
+        // Run the command with the option to remove keys/strings that are not present anymore
+        $this->artisan('localize en --remove-missing')
+            ->assertExitCode(0);
+
+        // Do created locale files exist?
+        self::assertDefaultLangFilesExist('en', ['app']);
+        self::assertJsonLangFilesExist('en');
+
+        // Do their contents match the expected results?
+        $enDefaultContents = $this->getDefaultLangContents('en', 'app');
+        $enJsonContents = $this->getJsonLangContents('en');
+        self::assertSame(['name' => 'Name'], $enDefaultContents);
+        self::assertSame(['Login' => 'Login'], $enJsonContents);
+
+        // Cleanup.
+        self::flushDirectories('lang', 'views');
+    }
 }

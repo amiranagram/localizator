@@ -14,9 +14,9 @@ class Localizator
      * @param string $locale
      * @return void
      */
-    public function localize(Translatable $keys, string $type, string $locale): void
+    public function localize(Translatable $keys, string $type, string $locale, bool $removeMissing): void
     {
-        $this->getWriter($type)->put($locale, $this->collect($keys, $type, $locale));
+        $this->getWriter($type)->put($locale, $this->collect($keys, $type, $locale, $removeMissing));
     }
 
     /**
@@ -25,13 +25,15 @@ class Localizator
      * @param string $locale
      * @return Translatable
      */
-    protected function collect(Translatable $keys, string $type, string $locale): Translatable
+    protected function collect(Translatable $keys, string $type, string $locale, bool $removeMissing): Translatable
     {
         return $keys
-            ->merge($this->getCollector($type)->getTranslated($locale))
-            ->when(config('localizator.sort'), function (Translatable $keyCollection) {
-                return $keyCollection->sortAlphabetically();
-            });
+            ->merge($this->getCollector($type)->getTranslated($locale)
+                ->when($removeMissing, function (Translatable $keyCollection) use ($keys) {
+                    return $keyCollection->intersectByKeys($keys);
+                }))->when(config('localizator.sort'), function (Translatable $keyCollection) {
+                    return $keyCollection->sortAlphabetically();
+                });
     }
 
     /**

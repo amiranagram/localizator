@@ -24,4 +24,13 @@ class DefaultKeyCollection extends Translatable
     {
         return parent::merge(Arr::dot($items));
     }
+
+    /**
+     * @param mixed $items
+     * @return static
+     */
+    public function intersectByKeys($items): self
+    {
+        return new DefaultKeyCollection(collect(Arr::dot($this))->intersectByKeys($items));
+    }
 }
