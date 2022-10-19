@@ -31,6 +31,6 @@ class DefaultKeyCollection extends Translatable
      */
     public function intersectByKeys($items): self
     {
-        return new DefaultKeyCollection(collect(Arr::dot($this))->intersectByKeys($items));
+        return new self(collect(Arr::dot($this))->intersectByKeys($items));
     }
 }

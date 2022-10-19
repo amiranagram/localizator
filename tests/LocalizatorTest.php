@@ -302,7 +302,7 @@ PHP;
 
         $this->createTestDefaultLangFile([
             'missingstring' => 'Missing',
-            'name' => 'Name'
+            'name' => 'Name',
         ], 'app', 'en');
         $this->createTestJsonLangFile([
             'Login' => 'Login',
