@@ -24,17 +24,6 @@ class TestCase extends Orchestra
     }
 
     /**
-     * This method is called after the last test of this test class is run.
-     *
-     * @return void
-     */
-    public static function tearDownAfterClass(): void
-    {
-        // Flush one last time after all tests have finished running.
-        self::flushDirectories('lang', 'views');
-    }
-
-    /**
      * Get package providers.
      *
      * @param \Illuminate\Foundation\Application|\Illuminate\Contracts\Foundation\Application $app
