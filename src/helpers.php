@@ -7,6 +7,6 @@ if (! function_exists('lang_path')) {
      */
     function lang_path($path = '')
     {
-        return resource_path('lang'.($path !== '' ? DIRECTORY_SEPARATOR.$path : ''));
+        return app()->langPath($path);
     }
 }
