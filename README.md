@@ -142,6 +142,13 @@ In this case translation strings will be generated for the language specified in
 
 > Note: Strings you have already translated will not be overwritten.
 
+### Remove Missing Keys
+
+By default, the strings inside the locale files will be preserved even if they are not present the next time you run the localize command.
+If you want to remove those keys that are not present in your files anymore you can append the --remove-missing option to the localize command.
+``` bash
+php artisan localize --remove-missing
+```
 ### Key Sorting
 
 By default, the strings generated inside those JSON files will be sorted alphabetically by their keys.
