@@ -2,6 +2,12 @@
 
 All notable changes to `amirami/localizator` will be documented in this file.
 
+## 0.10.1 - 2022-10-19
+
+### Added
+
+- Added an option to remove missing keys by @filip-nifti in https://github.com/amiranagram/localizator/pull/42
+
 ## 0.9.1 - 2022-04-11
 
 ## Changed
