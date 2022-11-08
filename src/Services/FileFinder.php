@@ -33,7 +33,10 @@ class FileFinder
         }, $this->config['search']['dirs']);
 
         return new Collection(
-            (new Finder)->in($directories)->name($this->config['search']['patterns'])->files()
+            (new Finder)->in($directories)
+                ->notPath($this->config['search']['exclude'])
+                ->name($this->config['search']['patterns'])
+                ->files()
         );
     }
 }

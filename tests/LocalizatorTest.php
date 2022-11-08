@@ -333,4 +333,34 @@ PHP;
         // Cleanup.
         self::flushDirectories('lang', 'views');
     }
+
+    public function testDirectoriesAreBeingExcluded(): void
+    {
+        mkdir(resource_path('views/sub1'), 0755);
+        mkdir(resource_path('views/sub2'), 0755);
+
+        $this->createTestView("{{ __('Foo') }}");
+        $this->createTestView("{{ __('Bar') }}", 'sub1/test');
+        $this->createTestView("{{ __('Baz') }}", 'sub2/test');
+
+        config([
+            'localizator.sort' => false,
+            'localizator.search.exclude' => 'sub1',
+        ]);
+
+        $this->artisan('localize', ['lang' => 'en']);
+
+        // Do created locale files exist?
+        self::assertJsonLangFilesExist('en');
+
+        // Do their contents match the expected results?
+        $contents = $this->getJsonLangContents('en');
+        self::assertSame([
+            'Baz' => 'Baz',
+            'Foo' => 'Foo',
+        ], $contents);
+
+        // Cleanup.
+        self::flushDirectories('lang', 'views');
+    }
 }

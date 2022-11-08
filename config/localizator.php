@@ -30,6 +30,14 @@ return [
         'dirs'      => ['resources/views'],
 
         /**
+         * Subdirectories which will be excluded.
+         * The values must be relative to the included directory paths.
+         */
+        'exclude' => [
+            //
+        ],
+
+        /**
          * Patterns by which files should be queried.
          * The values can be a regular expression, glob, or just a string.
          */
