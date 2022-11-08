@@ -356,8 +356,8 @@ PHP;
         // Do their contents match the expected results?
         $contents = $this->getJsonLangContents('en');
         self::assertSame([
-            'Baz' => 'Baz',
             'Foo' => 'Foo',
+            'Baz' => 'Baz',
         ], $contents);
 
         // Cleanup.
