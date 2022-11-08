@@ -97,6 +97,14 @@ return [
          * Directories which should be looked inside.
          */
         'dirs'      => ['resources/views'],
+        
+        /**
+         * Subdirectories which will be excluded.
+         * The values must be relative to the included directory paths.
+         */
+        'exclude' => [
+            //
+        ],
 
         /**
          * Patterns by which files should be queried.
