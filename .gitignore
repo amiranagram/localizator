@@ -8,5 +8,4 @@ composer.lock
 coverage
 docs
 phpunit.xml
-psalm.xml
 vendor
