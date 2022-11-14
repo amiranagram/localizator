@@ -2,6 +2,12 @@
 
 All notable changes to `amirami/localizator` will be documented in this file.
 
+## 0.11.0 - 2022-11-14
+
+### Changed
+
+- Exclude subdirectories by @amiranagram in https://github.com/amiranagram/localizator/pull/45
+
 ## 0.10.1 - 2022-10-19
 
 ### Added
