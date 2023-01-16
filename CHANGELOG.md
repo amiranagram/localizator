@@ -2,6 +2,12 @@
 
 All notable changes to `amirami/localizator` will be documented in this file.
 
+## 0.11.1 - 2023-01-16
+
+### Fixed
+
+- `lang_path` for Laravel 9 by @amiranagram in https://github.com/amiranagram/localizator/pull/49
+
 ## 0.11.0 - 2022-11-14
 
 ### Changed
