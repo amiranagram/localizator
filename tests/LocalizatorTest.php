@@ -344,7 +344,6 @@ PHP;
         $this->createTestView("{{ __('Baz') }}", 'sub2/test');
 
         config([
-            'localizator.sort' => false,
             'localizator.search.exclude' => 'sub1',
         ]);
 
@@ -356,8 +355,8 @@ PHP;
         // Do their contents match the expected results?
         $contents = $this->getJsonLangContents('en');
         self::assertSame([
-            'Foo' => 'Foo',
             'Baz' => 'Baz',
+            'Foo' => 'Foo',
         ], $contents);
 
         // Cleanup.
