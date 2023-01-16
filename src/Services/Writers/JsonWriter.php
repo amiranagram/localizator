@@ -16,8 +16,6 @@ class JsonWriter implements Writable
     {
         $file = lang_path("{$locale}.json");
 
-        print_r($locale);
-        print_r($file);
         (new Filesystem)->put(
             $file,
             $keys->toJson(JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)

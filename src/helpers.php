@@ -7,6 +7,8 @@ if (! function_exists('lang_path')) {
      */
     function lang_path($path = '')
     {
-        return app()->langPath($path);
+        return version_compare(app()->version(), '9.0', '>=')
+            ? app()->langPath($path)
+            : resource_path('lang'.($path !== '' ? DIRECTORY_SEPARATOR.$path : ''));
     }
 }
