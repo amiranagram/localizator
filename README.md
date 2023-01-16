@@ -7,6 +7,10 @@
 
 Localizator is a small tool for Laravel that gives you the ability to extract untranslated string from your project files with one command.
 
+## Sponsors
+
+[![locale_ad](art/locale_ad.png)](https://uselocale.com?utm_source=localizator&utm_medium=ad1)
+
 ## Support
 
 <a href="https://www.buymeacoffee.com/amirami" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
