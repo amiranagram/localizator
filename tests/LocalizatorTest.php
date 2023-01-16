@@ -336,8 +336,6 @@ PHP;
 
     public function testDirectoriesAreBeingExcluded(): void
     {
-        $this->markTestSkipped('Temp');
-
         mkdir(resource_path('views/sub1'), 0755);
         mkdir(resource_path('views/sub2'), 0755);
 
@@ -346,7 +344,6 @@ PHP;
         $this->createTestView("{{ __('Baz') }}", 'sub2/test');
 
         config([
-            'localizator.sort' => false,
             'localizator.search.exclude' => 'sub1',
         ]);
 
@@ -358,8 +355,8 @@ PHP;
         // Do their contents match the expected results?
         $contents = $this->getJsonLangContents('en');
         self::assertSame([
-            'Foo' => 'Foo',
             'Baz' => 'Baz',
+            'Foo' => 'Foo',
         ], $contents);
 
         // Cleanup.
