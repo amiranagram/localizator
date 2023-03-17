@@ -9,26 +9,22 @@ jobs:
       fail-fast: true
       matrix:
         os: [ ubuntu-latest ]
-        php: [ 7.2.5, 8.0 , 8.1 ]
-        laravel: [ 6.*, 8.*, ^9.33 , 10.* ]
-        testbench: [ ^4.0, ^6.6, ^7.0 , 8.0 ]
+        php: [ 7.3, 8.0 ]
+        laravel: [ 8.*, ^9.33 , 10.* ]
+        testbench: [ ^4.0, ^6.6, ^7.0]
         stability: [ prefer-lowest, prefer-stable ]
         exclude:
-          - php: 7.2.5
+          - php: 7.3
             laravel: 10.*
           - php: 8.0
             laravel: 10.*
-          - php: 7.2.5
+          - php: 7.3
             laravel: 8.*
-          - php: 7.2.5
+          - php: 7.3
             laravel: ^9.33
-          - php: 7.2.5
+          - php: 7.3
             testbench: ^6.6
-          - php: 7.2.5
-            testbench: ^7.0
-          - laravel: 6.*
-            testbench: ^6.6
-          - laravel: 6.*
+          - php: 7.3
             testbench: ^7.0
           - laravel: 8.*
             testbench: ^4.0
