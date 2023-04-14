@@ -2,6 +2,12 @@
 
 All notable changes to `amirami/localizator` will be documented in this file.
 
+## 0.12.0 - 2023-04-14
+
+### What's Changed
+
+- Add Laravel 10 compatibility by @musmanikram in https://github.com/amiranagram/localizator/pull/55
+
 ## 0.11.1 - 2023-01-16
 
 ### Fixed
