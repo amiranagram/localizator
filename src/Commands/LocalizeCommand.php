@@ -16,7 +16,7 @@ class LocalizeCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'localize {lang?} {--remove-missing}';
+    protected $signature = 'localize {lang?} {--remove-missing} {--force}';
 
     /**
      * The console command description.
