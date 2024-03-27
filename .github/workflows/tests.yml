@@ -1,6 +1,12 @@
 name: tests
 
-on: [ pull_request ]
+on:
+  push:
+    branches:
+      - master
+      - 0.x
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
   test:
@@ -9,57 +15,24 @@ jobs:
       fail-fast: true
       matrix:
         os: [ ubuntu-latest ]
-        php: [ 7.2.5, 8.0, 8.1 ]
-        laravel: [ 6.*, 8.*, ^9.33, 10.* ]
-        testbench: [ ^4.0, ^6.6, ^7.0, ^8.0 ]
+        php: [ '8.0', '8.1', '8.2', '8.3' ]
+        laravel: [ '8.0', '9.33', '10.0', '11.0' ]
         stability: [ prefer-lowest, prefer-stable ]
         exclude:
-          - php: 7.2.5
-            laravel: 10.*
-          - php: 8.0
-            laravel: 10.*
-          - php: 8.1
-            laravel: 6.*
-          - php: 7.2.5
-            laravel: 8.*
-          - php: 7.2.5
-            laravel: ^9.33
-          - php: 7.2.5
-            testbench: ^8.0
-          - php: 7.2.5
-            testbench: ^6.6
-          - php: 7.2.5
-            testbench: ^7.0
-          - php: 8.0
-            testbench: ^8.0
-          - php: 8.1
-            testbench: ^4.0
-          - php: 8.1
-            testbench: ^6.6
-          - php: 8.1
-            testbench: ^7.0
-          - laravel: 6.*
-            testbench: ^6.6
-          - laravel: 6.*
-            testbench: ^7.0
-          - laravel: 8.*
-            testbench: ^4.0
-          - laravel: 8.*
-            testbench: ^7.0
-          - laravel: 8.*
-            testbench: ^8.0
-          - laravel: ^9.33
-            testbench: ^4.0
-          - laravel: ^9.33
-            testbench: ^6.6
-          - laravel: ^9.33
-            testbench: ^8.0
+          - php: '8.0'
+            laravel: '10.0'
+          - php: '8.0'
+            laravel: '11.0'
+          - php: '8.1'
+            laravel: '11.0'
+          - laravel: '8.0'
+            stability: prefer-lowest
 
-    name: php-${{ matrix.php }} - laravel-${{ matrix.laravel }} - testbench-${{ matrix.testbench }} - ${{ matrix.stability }} - ${{ matrix.os }}
+    name: php-${{ matrix.php }} - laravel-${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -75,8 +48,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update --dev
-          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+          composer require "illuminate/support:^${{ matrix.laravel }}" --no-update
+          composer update --${{ matrix.stability }} --prefer-dist --no-interaction --no-progress
 
       - name: Execute tests
-        run: vendor/bin/phpunit
+        run: vendor/bin/phpunit --no-coverage
