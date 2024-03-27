@@ -2,6 +2,18 @@
 
 All notable changes to `amirami/localizator` will be documented in this file.
 
+## 0.13.0 - 2024-03-27
+
+### What's Changed
+
+* Support Laravel 11 by @asbiin in https://github.com/amiranagram/localizator/pull/60
+
+### New Contributors
+
+* @asbiin made their first contribution in https://github.com/amiranagram/localizator/pull/60
+
+**Full Changelog**: https://github.com/amiranagram/localizator/compare/v0.12.1-alpha...v0.13.0-alpha
+
 ## 0.12.1 - 2023-04-24
 
 ### What's Changed
